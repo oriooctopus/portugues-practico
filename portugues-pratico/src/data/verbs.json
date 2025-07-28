@@ -1,0 +1,733 @@
+[
+  {
+    "verb": "falar",
+    "infinitive": "falar",
+    "translation": "to speak",
+    "regularity": "regular",
+    "conjugations": {
+      "presentIndicative": {
+        "eu": "falo",
+        "tu": "falas",
+        "voce": "fala",
+        "nos": "falamos",
+        "vos": "falais",
+        "voces": "falam"
+      },
+      "preteriteIndicative": {
+        "eu": "falei",
+        "tu": "falaste",
+        "voce": "falou",
+        "nos": "falamos",
+        "vos": "falastes",
+        "voces": "falaram"
+      },
+      "imperfectIndicative": {
+        "eu": "falava",
+        "tu": "falavas",
+        "voce": "falava",
+        "nos": "falávamos",
+        "vos": "faláveis",
+        "voces": "falavam"
+      },
+      "futureIndicative": {
+        "eu": "falarei",
+        "tu": "falarás",
+        "voce": "falará",
+        "nos": "falaremos",
+        "vos": "falareis",
+        "voces": "falarão"
+      },
+      "conditionalIndicative": {
+        "eu": "falaria",
+        "tu": "falarias",
+        "voce": "falaria",
+        "nos": "falaríamos",
+        "vos": "falaríeis",
+        "voces": "falariam"
+      },
+      "presentSubjunctive": {
+        "eu": "fale",
+        "tu": "fales",
+        "voce": "fale",
+        "nos": "falemos",
+        "vos": "faleis",
+        "voces": "falem"
+      },
+      "imperfectSubjunctive": {
+        "eu": "falasse",
+        "tu": "falasses",
+        "voce": "falasse",
+        "nos": "falássemos",
+        "vos": "falásseis",
+        "voces": "falassem"
+      },
+      "imperative": {
+        "tu": "fala",
+        "voce": "fale",
+        "nos": "falemos",
+        "vos": "falai",
+        "voces": "falem"
+      }
+    }
+  },
+  {
+    "verb": "comer",
+    "infinitive": "comer",
+    "translation": "to eat",
+    "regularity": "regular",
+    "conjugations": {
+      "presentIndicative": {
+        "eu": "como",
+        "tu": "comes",
+        "voce": "come",
+        "nos": "comemos",
+        "vos": "comeis",
+        "voces": "comem"
+      },
+      "preteriteIndicative": {
+        "eu": "comi",
+        "tu": "comeste",
+        "voce": "comeu",
+        "nos": "comemos",
+        "vos": "comestes",
+        "voces": "comeram"
+      },
+      "imperfectIndicative": {
+        "eu": "comia",
+        "tu": "comias",
+        "voce": "comia",
+        "nos": "comíamos",
+        "vos": "comíeis",
+        "voces": "comiam"
+      },
+      "futureIndicative": {
+        "eu": "comerei",
+        "tu": "comerás",
+        "voce": "comerá",
+        "nos": "comeremos",
+        "vos": "comereis",
+        "voces": "comerão"
+      },
+      "conditionalIndicative": {
+        "eu": "comeria",
+        "tu": "comerias",
+        "voce": "comeria",
+        "nos": "comeríamos",
+        "vos": "comeríeis",
+        "voces": "comeriam"
+      },
+      "presentSubjunctive": {
+        "eu": "coma",
+        "tu": "comas",
+        "voce": "coma",
+        "nos": "comamos",
+        "vos": "comais",
+        "voces": "comam"
+      },
+      "imperfectSubjunctive": {
+        "eu": "comesse",
+        "tu": "comesses",
+        "voce": "comesse",
+        "nos": "comêssemos",
+        "vos": "comêsseis",
+        "voces": "comessem"
+      },
+      "imperative": {
+        "tu": "come",
+        "voce": "coma",
+        "nos": "comamos",
+        "vos": "comei",
+        "voces": "comam"
+      }
+    }
+  },
+  {
+    "verb": "partir",
+    "infinitive": "partir",
+    "translation": "to leave",
+    "regularity": "regular",
+    "conjugations": {
+      "presentIndicative": {
+        "eu": "parto",
+        "tu": "partes",
+        "voce": "parte",
+        "nos": "partimos",
+        "vos": "partis",
+        "voces": "partem"
+      },
+      "preteriteIndicative": {
+        "eu": "parti",
+        "tu": "partiste",
+        "voce": "partiu",
+        "nos": "partimos",
+        "vos": "partistes",
+        "voces": "partiram"
+      },
+      "imperfectIndicative": {
+        "eu": "partia",
+        "tu": "partias",
+        "voce": "partia",
+        "nos": "partíamos",
+        "vos": "partíeis",
+        "voces": "partiam"
+      },
+      "futureIndicative": {
+        "eu": "partirei",
+        "tu": "partirás",
+        "voce": "partirá",
+        "nos": "partiremos",
+        "vos": "partireis",
+        "voces": "partirão"
+      },
+      "conditionalIndicative": {
+        "eu": "partiria",
+        "tu": "partirias",
+        "voce": "partiria",
+        "nos": "partiríamos",
+        "vos": "partiríeis",
+        "voces": "partiriam"
+      },
+      "presentSubjunctive": {
+        "eu": "parta",
+        "tu": "partas",
+        "voce": "parta",
+        "nos": "partamos",
+        "vos": "partais",
+        "voces": "partam"
+      },
+      "imperfectSubjunctive": {
+        "eu": "partisse",
+        "tu": "partisses",
+        "voce": "partisse",
+        "nos": "partíssemos",
+        "vos": "partísseis",
+        "voces": "partissem"
+      },
+      "imperative": {
+        "tu": "parte",
+        "voce": "parta",
+        "nos": "partamos",
+        "vos": "parti",
+        "voces": "partam"
+      }
+    }
+  },
+  {
+    "verb": "ser",
+    "infinitive": "ser",
+    "translation": "to be",
+    "regularity": "irregular",
+    "irregular_category": [
+      "highly_irregular"
+    ],
+    "conjugations": {
+      "presentIndicative": {
+        "eu": "sou",
+        "tu": "és",
+        "voce": "é",
+        "nos": "somos",
+        "vos": "sois",
+        "voces": "são"
+      },
+      "preteriteIndicative": {
+        "eu": "fui",
+        "tu": "foste",
+        "voce": "foi",
+        "nos": "fomos",
+        "vos": "fostes",
+        "voces": "foram"
+      },
+      "imperfectIndicative": {
+        "eu": "era",
+        "tu": "eras",
+        "voce": "era",
+        "nos": "éramos",
+        "vos": "éreis",
+        "voces": "eram"
+      },
+      "futureIndicative": {
+        "eu": "serei",
+        "tu": "serás",
+        "voce": "será",
+        "nos": "seremos",
+        "vos": "sereis",
+        "voces": "serão"
+      },
+      "conditionalIndicative": {
+        "eu": "seria",
+        "tu": "serias",
+        "voce": "seria",
+        "nos": "seríamos",
+        "vos": "seríeis",
+        "voces": "seriam"
+      },
+      "presentSubjunctive": {
+        "eu": "seja",
+        "tu": "sejas",
+        "voce": "seja",
+        "nos": "sejamos",
+        "vos": "sejais",
+        "voces": "sejam"
+      },
+      "imperfectSubjunctive": {
+        "eu": "fosse",
+        "tu": "fosses",
+        "voce": "fosse",
+        "nos": "fôssemos",
+        "vos": "fôsseis",
+        "voces": "fossem"
+      },
+      "imperative": {
+        "tu": "sê",
+        "voce": "seja",
+        "nos": "sejamos",
+        "vos": "sede",
+        "voces": "sejam"
+      }
+    }
+  },
+  {
+    "verb": "ter",
+    "infinitive": "ter",
+    "translation": "to have",
+    "regularity": "irregular",
+    "irregular_category": [
+      "highly_irregular"
+    ],
+    "conjugations": {
+      "presentIndicative": {
+        "eu": "tenho",
+        "tu": "tens",
+        "voce": "tem",
+        "nos": "temos",
+        "vos": "tendes",
+        "voces": "têm"
+      },
+      "preteriteIndicative": {
+        "eu": "tive",
+        "tu": "tiveste",
+        "voce": "teve",
+        "nos": "tivemos",
+        "vos": "tivestes",
+        "voces": "tiveram"
+      },
+      "imperfectIndicative": {
+        "eu": "tinha",
+        "tu": "tinhas",
+        "voce": "tinha",
+        "nos": "tínhamos",
+        "vos": "tínheis",
+        "voces": "tinham"
+      },
+      "futureIndicative": {
+        "eu": "terei",
+        "tu": "terás",
+        "voce": "terá",
+        "nos": "teremos",
+        "vos": "tereis",
+        "voces": "terão"
+      },
+      "conditionalIndicative": {
+        "eu": "teria",
+        "tu": "terias",
+        "voce": "teria",
+        "nos": "teríamos",
+        "vos": "teríeis",
+        "voces": "teriam"
+      },
+      "presentSubjunctive": {
+        "eu": "tenha",
+        "tu": "tenhas",
+        "voce": "tenha",
+        "nos": "tenhamos",
+        "vos": "tenhais",
+        "voces": "tenham"
+      },
+      "imperfectSubjunctive": {
+        "eu": "tivesse",
+        "tu": "tivesses",
+        "voce": "tivesse",
+        "nos": "tivéssemos",
+        "vos": "tivésseis",
+        "voces": "tivessem"
+      },
+      "imperative": {
+        "tu": "tem",
+        "voce": "tenha",
+        "nos": "tenhamos",
+        "vos": "tende",
+        "voces": "tenham"
+      }
+    }
+  },
+  {
+    "verb": "ir",
+    "infinitive": "ir",
+    "translation": "to go",
+    "regularity": "irregular",
+    "irregular_category": [
+      "highly_irregular"
+    ],
+    "conjugations": {
+      "presentIndicative": {
+        "eu": "vou",
+        "tu": "vais",
+        "voce": "vai",
+        "nos": "vamos",
+        "vos": "ides",
+        "voces": "vão"
+      },
+      "preteriteIndicative": {
+        "eu": "fui",
+        "tu": "foste",
+        "voce": "foi",
+        "nos": "fomos",
+        "vos": "fostes",
+        "voces": "foram"
+      },
+      "imperfectIndicative": {
+        "eu": "ia",
+        "tu": "ias",
+        "voce": "ia",
+        "nos": "íamos",
+        "vos": "íeis",
+        "voces": "iam"
+      },
+      "futureIndicative": {
+        "eu": "irei",
+        "tu": "irás",
+        "voce": "irá",
+        "nos": "iremos",
+        "vos": "ireis",
+        "voces": "irão"
+      },
+      "conditionalIndicative": {
+        "eu": "iria",
+        "tu": "irias",
+        "voce": "iria",
+        "nos": "iríamos",
+        "vos": "iríeis",
+        "voces": "iriam"
+      },
+      "presentSubjunctive": {
+        "eu": "vá",
+        "tu": "vás",
+        "voce": "vá",
+        "nos": "vamos",
+        "vos": "vades",
+        "voces": "vão"
+      },
+      "imperfectSubjunctive": {
+        "eu": "fosse",
+        "tu": "fosses",
+        "voce": "fosse",
+        "nos": "fôssemos",
+        "vos": "fôsseis",
+        "voces": "fossem"
+      },
+      "imperative": {
+        "tu": "vai",
+        "voce": "vá",
+        "nos": "vamos",
+        "vos": "ide",
+        "voces": "vão"
+      }
+    }
+  },
+  {
+    "verb": "estar",
+    "infinitive": "estar",
+    "translation": "to be (temporary)",
+    "regularity": "irregular",
+    "irregular_category": [
+      "stem_changing"
+    ],
+    "conjugations": {
+      "presentIndicative": {
+        "eu": "estou",
+        "tu": "estás",
+        "voce": "está",
+        "nos": "estamos",
+        "vos": "estais",
+        "voces": "estão"
+      },
+      "preteriteIndicative": {
+        "eu": "estive",
+        "tu": "estiveste",
+        "voce": "esteve",
+        "nos": "estivemos",
+        "vos": "estivestes",
+        "voces": "estiveram"
+      },
+      "imperfectIndicative": {
+        "eu": "estava",
+        "tu": "estavas",
+        "voce": "estava",
+        "nos": "estávamos",
+        "vos": "estáveis",
+        "voces": "estavam"
+      },
+      "futureIndicative": {
+        "eu": "estarei",
+        "tu": "estarás",
+        "voce": "estará",
+        "nos": "estaremos",
+        "vos": "estareis",
+        "voces": "estarão"
+      },
+      "conditionalIndicative": {
+        "eu": "estaria",
+        "tu": "estarias",
+        "voce": "estaria",
+        "nos": "estaríamos",
+        "vos": "estaríeis",
+        "voces": "estariam"
+      },
+      "presentSubjunctive": {
+        "eu": "esteja",
+        "tu": "estejas",
+        "voce": "esteja",
+        "nos": "estejamos",
+        "vos": "estejais",
+        "voces": "estejam"
+      },
+      "imperfectSubjunctive": {
+        "eu": "estivesse",
+        "tu": "estivesses",
+        "voce": "estivesse",
+        "nos": "estivéssemos",
+        "vos": "estivésseis",
+        "voces": "estivessem"
+      },
+      "imperative": {
+        "tu": "está",
+        "voce": "esteja",
+        "nos": "estejamos",
+        "vos": "estai",
+        "voces": "estejam"
+      }
+    }
+  },
+  {
+    "verb": "fazer",
+    "infinitive": "fazer",
+    "translation": "to do/make",
+    "regularity": "irregular",
+    "irregular_category": [
+      "highly_irregular"
+    ],
+    "conjugations": {
+      "presentIndicative": {
+        "eu": "faço",
+        "tu": "fazes",
+        "voce": "faz",
+        "nos": "fazemos",
+        "vos": "fazeis",
+        "voces": "fazem"
+      },
+      "preteriteIndicative": {
+        "eu": "fiz",
+        "tu": "fizeste",
+        "voce": "fez",
+        "nos": "fizemos",
+        "vos": "fizestes",
+        "voces": "fizeram"
+      },
+      "imperfectIndicative": {
+        "eu": "fazia",
+        "tu": "fazias",
+        "voce": "fazia",
+        "nos": "fazíamos",
+        "vos": "fazíeis",
+        "voces": "faziam"
+      },
+      "futureIndicative": {
+        "eu": "farei",
+        "tu": "farás",
+        "voce": "fará",
+        "nos": "faremos",
+        "vos": "fareis",
+        "voces": "farão"
+      },
+      "conditionalIndicative": {
+        "eu": "faria",
+        "tu": "farias",
+        "voce": "faria",
+        "nos": "faríamos",
+        "vos": "faríeis",
+        "voces": "fariam"
+      },
+      "presentSubjunctive": {
+        "eu": "faça",
+        "tu": "faças",
+        "voce": "faça",
+        "nos": "façamos",
+        "vos": "façais",
+        "voces": "façam"
+      },
+      "imperfectSubjunctive": {
+        "eu": "fizesse",
+        "tu": "fizesses",
+        "voce": "fizesse",
+        "nos": "fizéssemos",
+        "vos": "fizésseis",
+        "voces": "fizessem"
+      },
+      "imperative": {
+        "tu": "faz",
+        "voce": "faça",
+        "nos": "façamos",
+        "vos": "fazei",
+        "voces": "façam"
+      }
+    }
+  },
+  {
+    "verb": "dizer",
+    "infinitive": "dizer",
+    "translation": "to say",
+    "regularity": "irregular",
+    "irregular_category": [
+      "highly_irregular"
+    ],
+    "conjugations": {
+      "presentIndicative": {
+        "eu": "digo",
+        "tu": "dizes",
+        "voce": "diz",
+        "nos": "dizemos",
+        "vos": "dizeis",
+        "voces": "dizem"
+      },
+      "preteriteIndicative": {
+        "eu": "disse",
+        "tu": "disseste",
+        "voce": "disse",
+        "nos": "dissemos",
+        "vos": "dissestes",
+        "voces": "disseram"
+      },
+      "imperfectIndicative": {
+        "eu": "dizia",
+        "tu": "dizias",
+        "voce": "dizia",
+        "nos": "dizíamos",
+        "vos": "dizíeis",
+        "voces": "diziam"
+      },
+      "futureIndicative": {
+        "eu": "direi",
+        "tu": "dirás",
+        "voce": "dirá",
+        "nos": "diremos",
+        "vos": "direis",
+        "voces": "dirão"
+      },
+      "conditionalIndicative": {
+        "eu": "diria",
+        "tu": "dirias",
+        "voce": "diria",
+        "nos": "diríamos",
+        "vos": "diríeis",
+        "voces": "diriam"
+      },
+      "presentSubjunctive": {
+        "eu": "diga",
+        "tu": "digas",
+        "voce": "diga",
+        "nos": "digamos",
+        "vos": "digais",
+        "voces": "digam"
+      },
+      "imperfectSubjunctive": {
+        "eu": "dissesse",
+        "tu": "dissesses",
+        "voce": "dissesse",
+        "nos": "disséssemos",
+        "vos": "dissésseis",
+        "voces": "dissessem"
+      },
+      "imperative": {
+        "tu": "diz",
+        "voce": "diga",
+        "nos": "digamos",
+        "vos": "dizei",
+        "voces": "digam"
+      }
+    }
+  },
+  {
+    "verb": "ver",
+    "infinitive": "ver",
+    "translation": "to see",
+    "regularity": "irregular",
+    "irregular_category": [
+      "highly_irregular"
+    ],
+    "conjugations": {
+      "presentIndicative": {
+        "eu": "vejo",
+        "tu": "vês",
+        "voce": "vê",
+        "nos": "vemos",
+        "vos": "vedes",
+        "voces": "vêem"
+      },
+      "preteriteIndicative": {
+        "eu": "vi",
+        "tu": "viste",
+        "voce": "viu",
+        "nos": "vimos",
+        "vos": "vistes",
+        "voces": "viram"
+      },
+      "imperfectIndicative": {
+        "eu": "via",
+        "tu": "vias",
+        "voce": "via",
+        "nos": "víamos",
+        "vos": "víeis",
+        "voces": "viam"
+      },
+      "futureIndicative": {
+        "eu": "verei",
+        "tu": "verás",
+        "voce": "verá",
+        "nos": "veremos",
+        "vos": "vereis",
+        "voces": "verão"
+      },
+      "conditionalIndicative": {
+        "eu": "veria",
+        "tu": "verias",
+        "voce": "veria",
+        "nos": "veríamos",
+        "vos": "veríeis",
+        "voces": "veriam"
+      },
+      "presentSubjunctive": {
+        "eu": "veja",
+        "tu": "vejas",
+        "voce": "veja",
+        "nos": "vejamos",
+        "vos": "vejais",
+        "voces": "vejam"
+      },
+      "imperfectSubjunctive": {
+        "eu": "visse",
+        "tu": "visses",
+        "voce": "visse",
+        "nos": "víssemos",
+        "vos": "vísseis",
+        "voces": "vissem"
+      },
+      "imperative": {
+        "tu": "vê",
+        "voce": "veja",
+        "nos": "vejamos",
+        "vos": "vede",
+        "voces": "vejam"
+      }
+    }
+  }
+]

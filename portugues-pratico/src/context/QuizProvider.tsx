@@ -1,0 +1,102 @@
+import React, {
+  useReducer,
+} from "react";
+import type { ReactNode } from "react";
+import type {
+  QuizState,
+  QuizAction,
+  QuizContextType,
+} from "../types";
+import { QuizContext } from "./QuizContext";
+
+const initialState: QuizState = {
+  currentQuestion: null,
+  score: 0,
+  totalQuestions: 0,
+  isAnswered: false,
+  isCorrect: null,
+  userAnswer: "",
+};
+
+function quizReducer(
+  state: QuizState,
+  action: QuizAction,
+): QuizState {
+  switch (action.type) {
+    case "SET_QUESTION":
+      return {
+        ...state,
+        currentQuestion: action.payload,
+        isAnswered: false,
+        isCorrect: null,
+        userAnswer: "",
+      };
+    case "SET_ANSWER":
+      return {
+        ...state,
+        userAnswer: action.payload,
+      };
+    case "CHECK_ANSWER": {
+      if (!state.currentQuestion)
+        return state;
+      const isCorrect =
+        state.userAnswer
+          .trim()
+          .toLowerCase() ===
+        state.currentQuestion.correctAnswer.toLowerCase();
+      return {
+        ...state,
+        isAnswered: true,
+        isCorrect,
+        score: isCorrect
+          ? state.score + 1
+          : state.score,
+      };
+    }
+    case "NEXT_QUESTION":
+      return {
+        ...state,
+        totalQuestions:
+          state.totalQuestions + 1,
+        isAnswered: false,
+        isCorrect: null,
+        userAnswer: "",
+      };
+    case "RESET_QUIZ":
+      return {
+        ...initialState,
+        totalQuestions: 0,
+      };
+    case "INCREMENT_SCORE":
+      return {
+        ...state,
+        score: state.score + 1,
+      };
+    default:
+      return state;
+  }
+}
+
+interface QuizProviderProps {
+  children: ReactNode;
+}
+
+export const QuizProvider: React.FC<
+  QuizProviderProps
+> = ({ children }) => {
+  const [state, dispatch] = useReducer(
+    quizReducer,
+    initialState,
+  );
+
+  const value: QuizContextType = {
+    state,
+    dispatch,
+  };
+
+  return (
+    <QuizContext.Provider value={value}>
+      {children}
+    </QuizContext.Provider>
+  );
+};
