@@ -12,8 +12,10 @@ const QuizContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 2rem;
+  width: 100%;
   max-width: 600px;
   margin: 0 auto;
+  padding: 0 1rem;
 `;
 
 const QuizCard = styled.div`
@@ -49,6 +51,12 @@ const StartButton = styled.button`
     box-shadow: 0 6px 20px
       rgba(102, 126, 234, 0.6);
   }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
 `;
 
 const NoSettingsMessage = styled.div`
@@ -60,6 +68,20 @@ const NoSettingsMessage = styled.div`
     rgba(0, 0, 0, 0.1);
   text-align: center;
   color: #666;
+  width: 100%;
+`;
+
+const WelcomeTitle = styled.h2`
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+`;
+
+const WelcomeText = styled.p`
+  color: #666;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  line-height: 1.5;
 `;
 
 export const QuizView: React.FC =
@@ -142,15 +164,15 @@ export const QuizView: React.FC =
       return (
         <QuizContainer>
           <NoSettingsMessage>
-            <h2>
+            <WelcomeTitle>
               Configure Your Practice
-            </h2>
-            <p>
+            </WelcomeTitle>
+            <WelcomeText>
               Please go to Settings and
               select at least one
               pronoun and one tense to
               start practicing.
-            </p>
+            </WelcomeText>
           </NoSettingsMessage>
         </QuizContainer>
       );
@@ -160,15 +182,15 @@ export const QuizView: React.FC =
       return (
         <QuizContainer>
           <QuizCard>
-            <h2>
+            <WelcomeTitle>
               Ready to Practice
               Portuguese?
-            </h2>
-            <p>
+            </WelcomeTitle>
+            <WelcomeText>
               Test your knowledge of
               Portuguese verb
               conjugations!
-            </p>
+            </WelcomeText>
             <StartButton
               onClick={startQuiz}
             >
@@ -209,10 +231,6 @@ export const QuizView: React.FC =
             <Feedback
               isCorrect={
                 state.isCorrect
-              }
-              correctAnswer={
-                state.currentQuestion
-                  .correctAnswer
               }
               fullConjugation={
                 state.currentQuestion

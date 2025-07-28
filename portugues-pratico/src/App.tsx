@@ -4,12 +4,15 @@ import { QuizProvider } from "./context/QuizProvider";
 import { Layout } from "./components/Layout";
 import { QuizView } from "./components/QuizView";
 import { SettingsView } from "./components/SettingsView";
+import { WrongAnswersView } from "./components/WrongAnswersView";
 
 function App() {
   const [currentView, setCurrentView] =
-    useState<"quiz" | "settings">(
-      "quiz",
-    );
+    useState<
+      | "quiz"
+      | "settings"
+      | "wrong-answers"
+    >("quiz");
 
   return (
     <SettingsProvider>
@@ -20,8 +23,11 @@ function App() {
         >
           {currentView === "quiz" ? (
             <QuizView />
-          ) : (
+          ) : currentView ===
+            "settings" ? (
             <SettingsView />
+          ) : (
+            <WrongAnswersView />
           )}
         </Layout>
       </QuizProvider>

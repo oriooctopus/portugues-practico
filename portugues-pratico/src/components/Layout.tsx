@@ -19,6 +19,9 @@ const Header = styled.header`
   padding: 1rem 2rem;
   box-shadow: 0 2px 10px
     rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 `;
 
 const HeaderContent = styled.div`
@@ -70,17 +73,32 @@ const NavButton = styled.button<{
 
 const Main = styled.main`
   flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 2rem;
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+`;
+
+const MainContent = styled.div`
   width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 `;
 
 interface LayoutProps {
   children: ReactNode;
-  currentView: "quiz" | "settings";
+  currentView:
+    | "quiz"
+    | "settings"
+    | "wrong-answers";
   onViewChange: (
-    view: "quiz" | "settings",
+    view:
+      | "quiz"
+      | "settings"
+      | "wrong-answers",
   ) => void;
 }
 
@@ -118,10 +136,27 @@ export const Layout: React.FC<
             >
               Settings
             </NavButton>
+            <NavButton
+              active={
+                currentView ===
+                "wrong-answers"
+              }
+              onClick={() =>
+                onViewChange(
+                  "wrong-answers",
+                )
+              }
+            >
+              Wrong Answers
+            </NavButton>
           </Nav>
         </HeaderContent>
       </Header>
-      <Main>{children}</Main>
+      <Main>
+        <MainContent>
+          {children}
+        </MainContent>
+      </Main>
     </LayoutContainer>
   );
 };

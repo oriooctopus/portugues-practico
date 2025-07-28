@@ -6,6 +6,7 @@ import { TenseSelector } from "./TenseSelector";
 import { RegularitySelector } from "./RegularitySelector";
 
 const SettingsContainer = styled.div`
+  width: 100%;
   max-width: 800px;
   margin: 0 auto;
 `;
@@ -18,6 +19,7 @@ const SettingsCard = styled.div`
   box-shadow: 0 8px 32px
     rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
+  width: 100%;
 `;
 
 const SettingsTitle = styled.h2`
@@ -26,6 +28,7 @@ const SettingsTitle = styled.h2`
   font-size: 1.5rem;
   border-bottom: 2px solid #667eea;
   padding-bottom: 0.5rem;
+  text-align: center;
 `;
 
 const Section = styled.div`

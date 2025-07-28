@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { getWrongAnswers } from "../utils/wrongAnswers";
 
 const ScoreboardContainer = styled.div`
   background: rgba(255, 255, 255, 0.95);
@@ -12,10 +13,16 @@ const ScoreboardContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   min-width: 300px;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+  max-width: 600px;
 `;
 
 const ScoreItem = styled.div`
   text-align: center;
+  flex: 1;
+  min-width: 80px;
 `;
 
 const ScoreLabel = styled.div`
@@ -29,12 +36,22 @@ const ScoreValue = styled.div`
   font-size: 1.8rem;
   font-weight: bold;
   color: #667eea;
+  line-height: 1;
 `;
 
 const Accuracy = styled.div`
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1.8rem;
+  font-weight: bold;
   color: #28a745;
+  line-height: 1;
+`;
+
+const WrongAnswersCount = styled.div`
+  font-size: 0.7rem;
+  color: #ff6b6b;
+  margin-top: 0.25rem;
+  font-weight: 500;
+  line-height: 1;
 `;
 
 interface ScoreboardProps {
@@ -52,6 +69,9 @@ export const Scoreboard: React.FC<
             100,
         )
       : 0;
+
+  const wrongAnswersCount =
+    getWrongAnswers().length;
 
   return (
     <ScoreboardContainer>
@@ -74,6 +94,12 @@ export const Scoreboard: React.FC<
           Accuracy
         </ScoreLabel>
         <Accuracy>{accuracy}%</Accuracy>
+        {wrongAnswersCount > 0 && (
+          <WrongAnswersCount>
+            {wrongAnswersCount} wrong
+            answers saved
+          </WrongAnswersCount>
+        )}
       </ScoreItem>
     </ScoreboardContainer>
   );

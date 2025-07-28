@@ -8,6 +8,7 @@ import type {
   QuizContextType,
 } from "../types";
 import { QuizContext } from "./QuizContext";
+import { saveWrongAnswer } from "../utils/wrongAnswers";
 
 const initialState: QuizState = {
   currentQuestion: null,
@@ -44,6 +45,15 @@ function quizReducer(
           .trim()
           .toLowerCase() ===
         state.currentQuestion.correctAnswer.toLowerCase();
+
+      // Save wrong answer if incorrect
+      if (!isCorrect) {
+        saveWrongAnswer(
+          state.currentQuestion,
+          state.userAnswer,
+        );
+      }
+
       return {
         ...state,
         isAnswered: true,

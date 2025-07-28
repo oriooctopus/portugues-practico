@@ -6,18 +6,13 @@ const QuestionContainer = styled.div`
   margin-bottom: 2rem;
 `;
 
-const QuestionText = styled.div`
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  color: #333;
-`;
-
 const VerbInfo = styled.div`
   background: rgba(102, 126, 234, 0.1);
   padding: 1rem;
   border-radius: 12px;
   margin-bottom: 1.5rem;
   border-left: 4px solid #667eea;
+  text-align: center;
 `;
 
 const VerbName = styled.h3`
@@ -32,18 +27,14 @@ const VerbTranslation = styled.p`
   font-style: italic;
 `;
 
-const ConjugationPrompt = styled.div`
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  color: #333;
-`;
-
 const StemDisplay = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
   color: #667eea;
-  margin-bottom: 1rem;
   font-family: "Courier New", monospace;
+  display: flex;
+  align-items: center;
+  height: 60px;
 `;
 
 const InputContainer = styled.div`
@@ -52,6 +43,9 @@ const InputContainer = styled.div`
   justify-content: center;
   gap: 0.5rem;
   margin-bottom: 1rem;
+  flex-wrap: wrap;
+  min-height: 60px;
+  height: 60px;
 `;
 
 const AnswerInput = styled.input`
@@ -62,7 +56,9 @@ const AnswerInput = styled.input`
   text-align: center;
   font-family: "Courier New", monospace;
   width: 120px;
+  height: 60px;
   transition: border-color 0.2s ease;
+  box-sizing: border-box;
 
   &:focus {
     outline: none;
@@ -81,6 +77,9 @@ const PlusSign = styled.span`
   font-size: 1.5rem;
   color: #667eea;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  height: 60px;
 `;
 
 interface QuestionCardProps {
@@ -136,35 +135,20 @@ export const QuestionCard: React.FC<
 
   return (
     <QuestionContainer>
-      <QuestionText>
-        Conjugate{" "}
-        <strong>
-          {question.verb.infinitive}
-        </strong>{" "}
-        in the{" "}
-        <strong>
-          {formatTense(question.tense)}
-        </strong>{" "}
-        for{" "}
-        <strong>
-          {formatPronoun(
-            question.pronoun,
-          )}
-        </strong>
-      </QuestionText>
-
       <VerbInfo>
         <VerbName>
           {question.verb.infinitive}
         </VerbName>
         <VerbTranslation>
-          {question.verb.translation}
+          {formatTense(question.tense)
+            .toLowerCase()
+            .replace(/\s+/g, "-")}
+          ,{" "}
+          {formatPronoun(
+            question.pronoun,
+          )}
         </VerbTranslation>
       </VerbInfo>
-
-      <ConjugationPrompt>
-        Complete the conjugation:
-      </ConjugationPrompt>
 
       <InputContainer>
         <StemDisplay>
@@ -181,7 +165,6 @@ export const QuestionCard: React.FC<
           }
           onKeyPress={onKeyPress}
           disabled={isAnswered}
-          placeholder="ending"
           autoFocus
         />
       </InputContainer>
