@@ -11,18 +11,23 @@ const ScoreboardContainer = styled.div`
     rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
   min-width: 300px;
   flex-wrap: wrap;
   gap: 1rem;
   width: 100%;
   max-width: 600px;
+  height: 80px;
 `;
 
 const ScoreItem = styled.div`
   text-align: center;
   flex: 1;
   min-width: 80px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const ScoreLabel = styled.div`
@@ -30,6 +35,7 @@ const ScoreLabel = styled.div`
   color: #666;
   margin-bottom: 0.5rem;
   font-weight: 500;
+  line-height: 1;
 `;
 
 const ScoreValue = styled.div`
@@ -37,6 +43,7 @@ const ScoreValue = styled.div`
   font-weight: bold;
   color: #667eea;
   line-height: 1;
+  margin-bottom: 0.25rem;
 `;
 
 const Accuracy = styled.div`
@@ -44,14 +51,16 @@ const Accuracy = styled.div`
   font-weight: bold;
   color: #28a745;
   line-height: 1;
+  margin-bottom: 0.25rem;
 `;
 
 const WrongAnswersCount = styled.div`
-  font-size: 0.7rem;
-  color: #ff6b6b;
+  font-size: 0.65rem;
+  color: #e53e3e;
   margin-top: 0.25rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1;
+  opacity: 0.8;
 `;
 
 interface ScoreboardProps {

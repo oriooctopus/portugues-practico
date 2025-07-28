@@ -27,6 +27,16 @@ const QuizCard = styled.div`
     rgba(0, 0, 0, 0.1);
   width: 100%;
   text-align: center;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const FeedbackArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: auto;
 `;
 
 const StartButton = styled.button`
@@ -227,29 +237,31 @@ export const QuizView: React.FC =
             onKeyPress={handleKeyPress}
           />
 
-          {state.isAnswered && (
+          <FeedbackArea>
             <Feedback
               isCorrect={
                 state.isCorrect
+              }
+              correctAnswer={
+                state.currentQuestion
+                  .correctAnswer
               }
               fullConjugation={
                 state.currentQuestion
                   .fullConjugation
               }
               onNext={nextQuestion}
-            />
-          )}
-
-          {!state.isAnswered && (
-            <StartButton
-              onClick={checkAnswer}
-              disabled={
-                !state.userAnswer.trim()
+              onCheckAnswer={
+                checkAnswer
               }
-            >
-              Check Answer
-            </StartButton>
-          )}
+              isAnswered={
+                state.isAnswered
+              }
+              userAnswer={
+                state.userAnswer
+              }
+            />
+          </FeedbackArea>
         </QuizCard>
       </QuizContainer>
     );

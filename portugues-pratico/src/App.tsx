@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { SettingsProvider } from "./context/SettingsProvider";
 import { QuizProvider } from "./context/QuizProvider";
 import { Layout } from "./components/Layout";

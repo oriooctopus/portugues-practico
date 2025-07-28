@@ -2,12 +2,10 @@ import React from "react";
 import styled from "@emotion/styled";
 import type { Question } from "../types";
 
-const QuestionContainer = styled.div`
-  margin-bottom: 2rem;
-`;
+const QuestionContainer = styled.div``;
 
 const VerbInfo = styled.div`
-  background: rgba(102, 126, 234, 0.1);
+  background: rgba(102, 126, 234, 0.15);
   padding: 1rem;
   border-radius: 12px;
   margin-bottom: 1.5rem;
@@ -17,14 +15,16 @@ const VerbInfo = styled.div`
 
 const VerbName = styled.h3`
   margin: 0 0 0.5rem 0;
-  color: #667eea;
+  color: #4a5568;
   font-size: 1.3rem;
+  font-weight: 700;
 `;
 
 const VerbTranslation = styled.p`
   margin: 0;
-  color: #666;
+  color: #2d3748;
   font-style: italic;
+  font-weight: 500;
 `;
 
 const StemDisplay = styled.div`
