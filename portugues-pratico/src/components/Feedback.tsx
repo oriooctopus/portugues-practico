@@ -14,6 +14,12 @@ const FeedbackContainer = styled.div<{
       : "transparent"};
 `;
 
+const ButtonsContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+`;
+
 const CorrectAnswer = styled.div<{
   isCorrect: boolean | null;
   showAnswer: boolean;
@@ -35,10 +41,7 @@ const CorrectAnswer = styled.div<{
   transition: opacity 0.2s ease;
 `;
 
-const ActionButton = styled.button<{
-  isAnswered: boolean;
-  disabled?: boolean;
-}>`
+const BaseButton = styled.button`
   background: linear-gradient(
     135deg,
     #667eea 0%,
@@ -50,11 +53,28 @@ const ActionButton = styled.button<{
   border-radius: 8px;
   font-size: 1rem;
   font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 180px;
+  flex-shrink: 0;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px
+      rgba(102, 126, 234, 0.4);
+  }
+`;
+
+const ActionButton = styled(
+  BaseButton,
+)<{
+  isAnswered: boolean;
+  disabled?: boolean;
+}>`
   cursor: ${(props) =>
     props.disabled
       ? "not-allowed"
       : "pointer"};
-  transition: all 0.2s ease;
   margin-top: 1rem;
   opacity: ${(props) =>
     props.disabled ? 0.6 : 1};
@@ -77,6 +97,7 @@ interface FeedbackProps {
   fullConjugation: string;
   onNext: () => void;
   onCheckAnswer: () => void;
+  onRetry: () => void;
   isAnswered: boolean;
   userAnswer: string;
 }
@@ -88,6 +109,7 @@ export const Feedback: React.FC<
   fullConjugation,
   onNext,
   onCheckAnswer,
+  onRetry,
   isAnswered,
   userAnswer,
 }) => {
@@ -128,15 +150,28 @@ export const Feedback: React.FC<
           ) : null}
         </CorrectAnswer>
       )}
-      <ActionButton
-        onClick={handleButtonClick}
-        isAnswered={isAnswered}
-        disabled={isDisabled}
-      >
-        {isAnswered
-          ? "Next Question"
-          : "Check Answer"}
-      </ActionButton>
+
+      <ButtonsContainer>
+        {isAnswered &&
+          isCorrect === false && (
+            <ActionButton
+              onClick={onRetry}
+              isAnswered={isAnswered}
+            >
+              Try Again
+            </ActionButton>
+          )}
+
+        <ActionButton
+          onClick={handleButtonClick}
+          isAnswered={isAnswered}
+          disabled={isDisabled}
+        >
+          {isAnswered
+            ? "Next Question"
+            : "Check Answer"}
+        </ActionButton>
+      </ButtonsContainer>
     </FeedbackContainer>
   );
 };

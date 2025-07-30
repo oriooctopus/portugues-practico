@@ -89,7 +89,7 @@ interface QuestionCardProps {
   onAnswerChange: (
     answer: string,
   ) => void;
-  onKeyPress: (
+  onKeyPress?: (
     e: React.KeyboardEvent,
   ) => void;
 }
@@ -163,7 +163,9 @@ export const QuestionCard: React.FC<
               e.target.value,
             )
           }
-          onKeyPress={onKeyPress}
+          onKeyPress={
+            onKeyPress || undefined
+          }
           disabled={isAnswered}
           autoFocus
         />

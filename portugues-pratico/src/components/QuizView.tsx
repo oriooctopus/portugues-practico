@@ -1,4 +1,6 @@
-import React from "react";
+import React, {
+  useEffect,
+} from "react";
 import styled from "@emotion/styled";
 import { useQuiz } from "../context/useQuiz";
 import { useSettings } from "../context/useSettings";
@@ -39,36 +41,6 @@ const FeedbackArea = styled.div`
   margin-top: auto;
 `;
 
-const StartButton = styled.button`
-  background: linear-gradient(
-    135deg,
-    #667eea 0%,
-    #764ba2 100%
-  );
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 15px
-    rgba(102, 126, 234, 0.4);
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px
-      rgba(102, 126, 234, 0.6);
-  }
-
-  &:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
-  }
-`;
-
 const NoSettingsMessage = styled.div`
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
@@ -100,19 +72,82 @@ export const QuizView: React.FC =
       useQuiz();
     const { settings } = useSettings();
 
-    const startQuiz = () => {
-      const question =
-        generateQuestion(settings);
-      if (question) {
-        dispatch({
-          type: "SET_QUESTION",
-          payload: question,
-        });
-        dispatch({
-          type: "NEXT_QUESTION",
-        });
-      }
+    // Check if any settings are selected
+    const hasValidSettings = () => {
+      const hasPronouns = Object.values(
+        settings.pronouns,
+      ).some((enabled) => enabled);
+      const hasTenses = Object.values(
+        settings.tenses,
+      ).some((enabled) => enabled);
+      return hasPronouns && hasTenses;
     };
+
+    // Auto-start quiz when valid settings are available and no current question
+    useEffect(() => {
+      if (
+        hasValidSettings() &&
+        !state.currentQuestion
+      ) {
+        const question =
+          generateQuestion(settings);
+        if (question) {
+          dispatch({
+            type: "SET_QUESTION",
+            payload: question,
+          });
+          dispatch({
+            type: "NEXT_QUESTION",
+          });
+        }
+      }
+    }, [
+      settings,
+      state.currentQuestion,
+      dispatch,
+    ]);
+
+    // Global keyboard listener
+    useEffect(() => {
+      const handleKeyDown = (
+        e: KeyboardEvent,
+      ) => {
+        if (e.key === "Enter") {
+          if (!state.isAnswered) {
+            // Only check answer if there's a user answer
+            if (
+              state.userAnswer.trim()
+            ) {
+              checkAnswer();
+            }
+          } else {
+            // If answer is incorrect, retry; otherwise go to next question
+            if (
+              state.isCorrect === false
+            ) {
+              retryQuestion();
+            } else {
+              nextQuestion();
+            }
+          }
+        }
+      };
+
+      document.addEventListener(
+        "keydown",
+        handleKeyDown,
+      );
+      return () => {
+        document.removeEventListener(
+          "keydown",
+          handleKeyDown,
+        );
+      };
+    }, [
+      state.isAnswered,
+      state.isCorrect,
+      state.userAnswer,
+    ]);
 
     const nextQuestion = () => {
       const question =
@@ -134,6 +169,12 @@ export const QuizView: React.FC =
       });
     };
 
+    const retryQuestion = () => {
+      dispatch({
+        type: "RETRY_QUESTION",
+      });
+    };
+
     const handleAnswerChange = (
       answer: string,
     ) => {
@@ -141,33 +182,6 @@ export const QuizView: React.FC =
         type: "SET_ANSWER",
         payload: answer,
       });
-    };
-
-    const handleKeyPress = (
-      e: React.KeyboardEvent,
-    ) => {
-      if (
-        e.key === "Enter" &&
-        !state.isAnswered
-      ) {
-        checkAnswer();
-      } else if (
-        e.key === "Enter" &&
-        state.isAnswered
-      ) {
-        nextQuestion();
-      }
-    };
-
-    // Check if any settings are selected
-    const hasValidSettings = () => {
-      const hasPronouns = Object.values(
-        settings.pronouns,
-      ).some((enabled) => enabled);
-      const hasTenses = Object.values(
-        settings.tenses,
-      ).some((enabled) => enabled);
-      return hasPronouns && hasTenses;
     };
 
     if (!hasValidSettings()) {
@@ -188,24 +202,18 @@ export const QuizView: React.FC =
       );
     }
 
+    // Show loading state while generating first question
     if (!state.currentQuestion) {
       return (
         <QuizContainer>
           <QuizCard>
             <WelcomeTitle>
-              Ready to Practice
-              Portuguese?
+              Loading Quiz...
             </WelcomeTitle>
             <WelcomeText>
-              Test your knowledge of
-              Portuguese verb
-              conjugations!
+              Preparing your Portuguese
+              practice session...
             </WelcomeText>
-            <StartButton
-              onClick={startQuiz}
-            >
-              Start Quiz
-            </StartButton>
           </QuizCard>
         </QuizContainer>
       );
@@ -234,7 +242,6 @@ export const QuizView: React.FC =
             onAnswerChange={
               handleAnswerChange
             }
-            onKeyPress={handleKeyPress}
           />
 
           <FeedbackArea>
@@ -254,6 +261,7 @@ export const QuizView: React.FC =
               onCheckAnswer={
                 checkAnswer
               }
+              onRetry={retryQuestion}
               isAnswered={
                 state.isAnswered
               }

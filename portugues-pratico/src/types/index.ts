@@ -80,4 +80,5 @@ export type QuizAction =
   | { type: "CHECK_ANSWER" }
   | { type: "NEXT_QUESTION" }
   | { type: "RESET_QUIZ" }
-  | { type: "INCREMENT_SCORE" };
+  | { type: "INCREMENT_SCORE" }
+  | { type: "RETRY_QUESTION" };

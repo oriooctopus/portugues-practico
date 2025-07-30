@@ -82,6 +82,13 @@ function quizReducer(
         ...state,
         score: state.score + 1,
       };
+    case "RETRY_QUESTION":
+      return {
+        ...state,
+        isAnswered: false,
+        isCorrect: null,
+        userAnswer: "",
+      };
     default:
       return state;
   }
