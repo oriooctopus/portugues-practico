@@ -3,13 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://oriooctopus.github.io/portugues-pratico",
+  "homepage": "https://oriooctopus.github.io/portugues-practico",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "npm run build && gh-pages -d dist"
+    "deploy": "npm run build && gh-pages -d dist",
+    "deploy-full": "./deploy.sh"
   },
   "dependencies": {
     "@emotion/babel-plugin": "^11.13.5",
