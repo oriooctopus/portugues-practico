@@ -44,6 +44,21 @@ jest.mock(
         },
       },
     },
+    {
+      verb: "comer",
+      infinitive: "comer",
+      translation: "to eat",
+      regularity: "regular",
+      conjugations: {
+        presentIndicative: {
+          eu: "como",
+          tu: "comes",
+          voce: "come",
+          nos: "comemos",
+          voces: "comem",
+        },
+      },
+    },
   ],
 );
 
@@ -109,6 +124,35 @@ const TestComponent: React.FC = () => {
     });
   };
 
+  const setComerQuestion = () => {
+    const question: Question = {
+      verb: {
+        verb: "comer",
+        infinitive: "comer",
+        translation: "to eat",
+        regularity: "regular",
+        conjugations: {
+          presentIndicative: {
+            eu: "como",
+            tu: "comes",
+            voce: "come",
+            nos: "comemos",
+            voces: "comem",
+          },
+        },
+      },
+      pronoun: "nos",
+      tense: "presentIndicative",
+      stem: "",
+      correctAnswer: "comemos",
+      fullConjugation: "comemos",
+    };
+    dispatch({
+      type: "SET_QUESTION",
+      payload: question,
+    });
+  };
+
   const setAnswer = (
     answer: string,
   ) => {
@@ -153,6 +197,12 @@ const TestComponent: React.FC = () => {
         data-testid="set-ser-question"
       >
         Set Ser Question
+      </button>
+      <button
+        onClick={setComerQuestion}
+        data-testid="set-comer-question"
+      >
+        Set Comer Question
       </button>
       <input
         data-testid="answer-input"
@@ -437,7 +487,7 @@ describe("QuizProvider", () => {
       });
     });
 
-    it("should not normalize accents (require exact accent matching)", async () => {
+    it("should NOT normalize accents (require exact accent matching)", async () => {
       const user = userEvent.setup();
       renderWithProvider(
         <TestComponent />,
@@ -475,6 +525,224 @@ describe("QuizProvider", () => {
           true,
         );
       });
+    });
+
+    it("should handle different accent scenarios correctly", async () => {
+      const user = userEvent.setup();
+      renderWithProvider(
+        <TestComponent />,
+      );
+
+      // Test ser with "são" (has accent)
+      fireEvent.click(
+        screen.getByTestId(
+          "set-ser-question",
+        ),
+      );
+
+      // Change the question to test "são"
+      const serQuestion: Question = {
+        verb: {
+          verb: "ser",
+          infinitive: "ser",
+          translation: "to be",
+          regularity: "irregular",
+          conjugations: {
+            presentIndicative: {
+              eu: "sou",
+              tu: "és",
+              voce: "é",
+              nos: "somos",
+              voces: "são",
+            },
+          },
+        },
+        pronoun: "voces",
+        tense: "presentIndicative",
+        stem: "",
+        correctAnswer: "são",
+        fullConjugation: "são",
+      };
+
+      // Set up the question manually
+      const { dispatch } = useQuiz();
+      dispatch({
+        type: "SET_QUESTION",
+        payload: serQuestion,
+      });
+
+      // Test correct answer with accent
+      const input = screen.getByTestId(
+        "answer-input",
+      );
+      await user.clear(input);
+      await user.type(input, "são");
+
+      fireEvent.click(
+        screen.getByTestId(
+          "check-answer",
+        ),
+      );
+
+      await waitFor(() => {
+        const state = JSON.parse(
+          screen.getByTestId("state")
+            .textContent || "{}",
+        );
+        expect(state.isCorrect).toBe(
+          true,
+        );
+      });
+
+      // Test incorrect answer without accent
+      fireEvent.click(
+        screen.getByTestId(
+          "retry-question",
+        ),
+      );
+      await user.clear(input);
+      await user.type(input, "sao");
+
+      fireEvent.click(
+        screen.getByTestId(
+          "check-answer",
+        ),
+      );
+
+      await waitFor(() => {
+        const state = JSON.parse(
+          screen.getByTestId("state")
+            .textContent || "{}",
+        );
+        expect(state.isCorrect).toBe(
+          false,
+        );
+      });
+    });
+
+    it("should handle comer with accent correctly", async () => {
+      const user = userEvent.setup();
+      renderWithProvider(
+        <TestComponent />,
+      );
+
+      // Set up comer question
+      fireEvent.click(
+        screen.getByTestId(
+          "set-comer-question",
+        ),
+      );
+
+      // Type correct answer
+      const input = screen.getByTestId(
+        "answer-input",
+      );
+      await user.type(input, "comemos");
+
+      // Check answer
+      fireEvent.click(
+        screen.getByTestId(
+          "check-answer",
+        ),
+      );
+
+      await waitFor(() => {
+        const state = JSON.parse(
+          screen.getByTestId("state")
+            .textContent || "{}",
+        );
+        expect(state.isCorrect).toBe(
+          true,
+        );
+        expect(state.isAnswered).toBe(
+          true,
+        );
+      });
+    });
+
+    it("should handle mixed accent scenarios", async () => {
+      const user = userEvent.setup();
+      renderWithProvider(
+        <TestComponent />,
+      );
+
+      // Test various accent combinations
+      const accentTests = [
+        {
+          input: "é",
+          expected: "é",
+          shouldPass: true,
+        },
+        {
+          input: "e",
+          expected: "é",
+          shouldPass: false,
+        },
+        {
+          input: "são",
+          expected: "são",
+          shouldPass: true,
+        },
+        {
+          input: "sao",
+          expected: "são",
+          shouldPass: false,
+        },
+        {
+          input: "falás",
+          expected: "falas",
+          shouldPass: false,
+        }, // Wrong accent
+        {
+          input: "falas",
+          expected: "falas",
+          shouldPass: true,
+        },
+      ];
+
+      for (const test of accentTests) {
+        // Set up a simple question
+        fireEvent.click(
+          screen.getByTestId(
+            "set-falar-question",
+          ),
+        );
+
+        // Clear and type the test input
+        const input =
+          screen.getByTestId(
+            "answer-input",
+          );
+        await user.clear(input);
+        await user.type(
+          input,
+          test.input,
+        );
+
+        // Check answer
+        fireEvent.click(
+          screen.getByTestId(
+            "check-answer",
+          ),
+        );
+
+        await waitFor(() => {
+          const state = JSON.parse(
+            screen.getByTestId("state")
+              .textContent || "{}",
+          );
+          expect(state.isCorrect).toBe(
+            test.shouldPass,
+          );
+        });
+
+        // Reset for next test
+        fireEvent.click(
+          screen.getByTestId(
+            "retry-question",
+          ),
+        );
+      }
     });
   });
 
