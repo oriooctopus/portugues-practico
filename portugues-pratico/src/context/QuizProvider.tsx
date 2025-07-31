@@ -60,47 +60,13 @@ function quizReducer(
           .toLowerCase();
       const correctAnswer =
         state.currentQuestion.correctAnswer.toLowerCase();
-      const stem =
-        state.currentQuestion.stem.toLowerCase();
 
       // Compare with accent normalization
-      let isCorrect =
+      const isCorrect =
         normalizeAccents(
           userAnswerTrimmed,
         ) ===
         normalizeAccents(correctAnswer);
-
-      // If not correct, check if user typed the full conjugation
-      // and we need to remove the duplicate letter from concatenation
-      if (
-        !isCorrect &&
-        userAnswerTrimmed.length > 0 &&
-        stem.length > 0
-      ) {
-        const lastStemLetter =
-          stem[stem.length - 1];
-        const firstUserLetter =
-          userAnswerTrimmed[0];
-
-        // If the last letter of stem matches first letter of user answer,
-        // try removing the first letter from user answer
-        if (
-          lastStemLetter ===
-          firstUserLetter
-        ) {
-          const userAnswerWithoutFirst =
-            userAnswerTrimmed.substring(
-              1,
-            );
-          isCorrect =
-            normalizeAccents(
-              userAnswerWithoutFirst,
-            ) ===
-            normalizeAccents(
-              correctAnswer,
-            );
-        }
-      }
 
       // Save wrong answer if incorrect
       if (!isCorrect) {
