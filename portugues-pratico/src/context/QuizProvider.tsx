@@ -9,6 +9,8 @@ import type {
 } from "../types";
 import { QuizContext } from "./QuizContext";
 import { saveWrongAnswer } from "../utils/wrongAnswers";
+import { updateSpacedRepetitionEntry } from "../utils/spacedRepetition";
+import { useSettings } from "./useSettings";
 
 const initialState: QuizState = {
   currentQuestion: null,
@@ -41,6 +43,18 @@ function quizReducer(
       if (!state.currentQuestion)
         return state;
 
+      // Normalize accents by removing them
+      const normalizeAccents = (
+        text: string,
+      ): string => {
+        return text
+          .normalize("NFD")
+          .replace(
+            /[\u0300-\u036f]/g,
+            "",
+          );
+      };
+
       const userAnswerTrimmed =
         state.userAnswer
           .trim()
@@ -48,10 +62,18 @@ function quizReducer(
       const correctAnswer =
         state.currentQuestion.correctAnswer.toLowerCase();
 
-      // Compare answers directly
+      // Normalize accents for comparison
+      const normalizedUserAnswer =
+        normalizeAccents(
+          userAnswerTrimmed,
+        );
+      const normalizedCorrectAnswer =
+        normalizeAccents(correctAnswer);
+
+      // Compare normalized answers
       const isCorrect =
-        userAnswerTrimmed ===
-        correctAnswer;
+        normalizedUserAnswer ===
+        normalizedCorrectAnswer;
 
       // Save wrong answer if incorrect
       if (!isCorrect) {
@@ -112,11 +134,33 @@ export const QuizProvider: React.FC<
     quizReducer,
     initialState,
   );
+  const { settings } = useSettings();
 
   const value: QuizContextType = {
     state,
     dispatch,
   };
+
+  // Update spaced repetition when answer is checked
+  React.useEffect(() => {
+    if (
+      state.isAnswered &&
+      state.currentQuestion
+    ) {
+      updateSpacedRepetitionEntry(
+        state.currentQuestion,
+        state.isCorrect || false,
+        settings.spacedRepetition
+          .reviewIntervalDays,
+      );
+    }
+  }, [
+    state.isAnswered,
+    state.isCorrect,
+    state.currentQuestion,
+    settings.spacedRepetition
+      .reviewIntervalDays,
+  ]);
 
   return (
     <QuizContext.Provider value={value}>

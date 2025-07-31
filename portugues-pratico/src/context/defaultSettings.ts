@@ -21,4 +21,8 @@ export const defaultSettings: QuizSettings =
       imperative: false,
     },
     regularity: "all",
+    spacedRepetition: {
+      enabled: true,
+      reviewIntervalDays: 1,
+    },
   };

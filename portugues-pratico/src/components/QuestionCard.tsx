@@ -1,4 +1,7 @@
-import React from "react";
+import React, {
+  useEffect,
+  useRef,
+} from "react";
 import styled from "@emotion/styled";
 import type { Question } from "../types";
 
@@ -100,6 +103,19 @@ export const QuestionCard: React.FC<
   onAnswerChange,
   onKeyPress,
 }) => {
+  const inputRef =
+    useRef<HTMLInputElement>(null);
+
+  // Auto-focus input when question changes or when retrying
+  useEffect(() => {
+    if (
+      !isAnswered &&
+      inputRef.current
+    ) {
+      inputRef.current.focus();
+    }
+  }, [question, isAnswered]);
+
   const formatTense = (
     tense: string,
   ): string => {
@@ -163,6 +179,7 @@ export const QuestionCard: React.FC<
           <PlusSign>+</PlusSign>
         </StemDisplay>
         <AnswerInput
+          ref={inputRef}
           type="text"
           value={userAnswer}
           onChange={(e) =>
@@ -174,7 +191,6 @@ export const QuestionCard: React.FC<
             onKeyPress || undefined
           }
           disabled={isAnswered}
-          autoFocus
         />
       </InputContainer>
     </QuestionContainer>

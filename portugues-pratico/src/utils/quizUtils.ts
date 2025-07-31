@@ -4,6 +4,10 @@ import type {
   QuizSettings,
 } from "../types";
 import verbsData from "../data/verbs.json";
+import {
+  shouldShowConjugation,
+  getDueConjugations,
+} from "./spacedRepetition";
 
 export const getFilteredVerbs = (
   settings: QuizSettings,
@@ -66,49 +70,117 @@ export const generateQuestion = (
     return null;
   }
 
-  // Randomly select verb, tense, and pronoun
-  const randomVerb =
-    filteredVerbs[
-      Math.floor(
-        Math.random() *
-          filteredVerbs.length,
-      )
-    ];
-  const randomTense =
-    availableTenses[
-      Math.floor(
-        Math.random() *
-          availableTenses.length,
-      )
-    ];
-  const randomPronoun =
-    availablePronouns[
-      Math.floor(
-        Math.random() *
-          availablePronouns.length,
-      )
-    ];
+  // Get conjugations due for review if spaced repetition is enabled
+  const dueConjugations =
+    getDueConjugations(settings);
 
-  const conjugation =
-    randomVerb.conjugations[
-      randomTense
-    ];
-  if (
-    !conjugation ||
-    !conjugation[randomPronoun]
-  ) {
-    return null;
+  // If there are due conjugations, prioritize them
+  if (dueConjugations.length > 0) {
+    // Randomly select from due conjugations
+    const randomDue =
+      dueConjugations[
+        Math.floor(
+          Math.random() *
+            dueConjugations.length,
+        )
+      ];
+
+    // Find the verb for this conjugation
+    const verb = filteredVerbs.find(
+      (v) =>
+        v.infinitive === randomDue.verb,
+    );
+    if (verb) {
+      const conjugation =
+        verb.conjugations[
+          randomDue.tense
+        ];
+      if (
+        conjugation &&
+        conjugation[randomDue.pronoun]
+      ) {
+        const fullConjugation =
+          conjugation[
+            randomDue.pronoun
+          ];
+        return {
+          verb,
+          pronoun: randomDue.pronoun,
+          tense: randomDue.tense,
+          stem: "",
+          correctAnswer:
+            fullConjugation,
+          fullConjugation,
+        };
+      }
+    }
   }
 
-  const fullConjugation =
-    conjugation[randomPronoun];
+  // Generate random questions, but filter by spaced repetition if enabled
+  let attempts = 0;
+  const maxAttempts = 100; // Prevent infinite loops
 
-  return {
-    verb: randomVerb,
-    pronoun: randomPronoun,
-    tense: randomTense,
-    stem: "",
-    correctAnswer: fullConjugation,
-    fullConjugation,
-  };
+  while (attempts < maxAttempts) {
+    // Randomly select verb, tense, and pronoun
+    const randomVerb =
+      filteredVerbs[
+        Math.floor(
+          Math.random() *
+            filteredVerbs.length,
+        )
+      ];
+    const randomTense =
+      availableTenses[
+        Math.floor(
+          Math.random() *
+            availableTenses.length,
+        )
+      ];
+    const randomPronoun =
+      availablePronouns[
+        Math.floor(
+          Math.random() *
+            availablePronouns.length,
+        )
+      ];
+
+    const conjugation =
+      randomVerb.conjugations[
+        randomTense
+      ];
+    if (
+      !conjugation ||
+      !conjugation[randomPronoun]
+    ) {
+      attempts++;
+      continue;
+    }
+
+    const fullConjugation =
+      conjugation[randomPronoun];
+
+    const question = {
+      verb: randomVerb,
+      pronoun: randomPronoun,
+      tense: randomTense,
+      stem: "",
+      correctAnswer: fullConjugation,
+      fullConjugation,
+    };
+
+    // Check if this conjugation should be shown based on spaced repetition
+    if (
+      shouldShowConjugation(
+        question,
+        settings,
+      )
+    ) {
+      return question;
+    }
+
+    attempts++;
+  }
+
+  // If we couldn't find a suitable question, return null
+  return null;
 };

@@ -35,6 +35,10 @@ export interface QuizSettings {
     | "regular"
     | "irregular";
   irregularCategories?: string[];
+  spacedRepetition: {
+    enabled: boolean;
+    reviewIntervalDays: number;
+  };
 }
 
 export interface QuizState {

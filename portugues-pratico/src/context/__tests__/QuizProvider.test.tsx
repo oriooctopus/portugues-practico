@@ -487,7 +487,7 @@ describe("QuizProvider", () => {
       });
     });
 
-    it("should NOT normalize accents (require exact accent matching)", async () => {
+    it("should normalize accents (ignore accents in comparison)", async () => {
       const user = userEvent.setup();
       renderWithProvider(
         <TestComponent />,
@@ -500,7 +500,7 @@ describe("QuizProvider", () => {
         ),
       );
 
-      // Type answer without accent (should be wrong)
+      // Type answer without accent (should be correct now)
       const input = screen.getByTestId(
         "answer-input",
       );
@@ -519,7 +519,7 @@ describe("QuizProvider", () => {
             .textContent || "{}",
         );
         expect(state.isCorrect).toBe(
-          false,
+          true,
         );
         expect(state.isAnswered).toBe(
           true,
@@ -594,7 +594,7 @@ describe("QuizProvider", () => {
         );
       });
 
-      // Test incorrect answer without accent
+      // Test correct answer without accent (should now be correct)
       fireEvent.click(
         screen.getByTestId(
           "retry-question",
@@ -615,7 +615,7 @@ describe("QuizProvider", () => {
             .textContent || "{}",
         );
         expect(state.isCorrect).toBe(
-          false,
+          true,
         );
       });
     });
@@ -676,7 +676,7 @@ describe("QuizProvider", () => {
         {
           input: "e",
           expected: "é",
-          shouldPass: false,
+          shouldPass: true, // Now should pass with accent normalization
         },
         {
           input: "são",
@@ -686,13 +686,13 @@ describe("QuizProvider", () => {
         {
           input: "sao",
           expected: "são",
-          shouldPass: false,
+          shouldPass: true, // Now should pass with accent normalization
         },
         {
           input: "falás",
           expected: "falas",
-          shouldPass: false,
-        }, // Wrong accent
+          shouldPass: false, // Still wrong because it's a different word
+        },
         {
           input: "falas",
           expected: "falas",

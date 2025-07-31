@@ -79,6 +79,10 @@ describe("quizUtils", () => {
       voces: true,
     },
     regularity: "all",
+    spacedRepetition: {
+      enabled: true,
+      reviewIntervalDays: 1,
+    },
   };
 
   describe("getFilteredVerbs", () => {

@@ -4,6 +4,8 @@ import { useSettings } from "../context/useSettings";
 import { PronounSelector } from "./PronounSelector";
 import { TenseSelector } from "./TenseSelector";
 import { RegularitySelector } from "./RegularitySelector";
+import { SpacedRepetitionSelector } from "./SpacedRepetitionSelector";
+import { SpacedRepetitionStats } from "./SpacedRepetitionStats";
 
 const SettingsContainer = styled.div`
   width: 100%;
@@ -118,6 +120,37 @@ export const SettingsView: React.FC =
               regularity pattern.
             </InfoText>
           </Section>
+
+          <Section>
+            <SectionTitle>
+              Spaced Repetition
+            </SectionTitle>
+            <SpacedRepetitionSelector
+              spacedRepetition={
+                settings.spacedRepetition
+              }
+              onChange={(
+                spacedRepetition,
+              ) =>
+                updateSettings({
+                  spacedRepetition,
+                })
+              }
+            />
+            <InfoText>
+              Enable spaced repetition
+              to focus on conjugations
+              you struggle with. Correct
+              answers won't appear
+              again, while incorrect
+              ones will be reviewed
+              later.
+            </InfoText>
+          </Section>
+        </SettingsCard>
+
+        <SettingsCard>
+          <SpacedRepetitionStats />
         </SettingsCard>
       </SettingsContainer>
     );
