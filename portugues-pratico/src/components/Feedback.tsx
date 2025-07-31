@@ -205,90 +205,9 @@ export const Feedback: React.FC<
         : "irregular";
 
     if (regularity === "regular") {
-      return `Regular ${verbType} verb - follows standard conjugation patterns.`;
+      return `Regular ${verbType} verb.`;
     } else {
-      // Analyze the actual conjugations to determine the pattern
-      const conjugations =
-        Object.values(
-          question.verb.conjugations[
-            question.tense
-          ] || {},
-        ) as string[];
-      const stem =
-        question.stem.toLowerCase();
-      const infinitive =
-        question.verb.infinitive.toLowerCase();
-      const baseInfinitive =
-        infinitive.substring(
-          0,
-          infinitive.length - 2,
-        );
-
-      // Check how many conjugations start with the stem
-      const stemBasedCount =
-        conjugations.filter((conj) =>
-          conj
-            .toLowerCase()
-            .startsWith(stem),
-        ).length;
-
-      // Check how many have meaningful common prefix with infinitive
-      const prefixBasedCount =
-        conjugations.filter((conj) => {
-          const fullConjugation =
-            conj.toLowerCase();
-          let commonLength = 0;
-          for (
-            let i = 0;
-            i <
-            Math.min(
-              baseInfinitive.length,
-              fullConjugation.length,
-            );
-            i++
-          ) {
-            if (
-              baseInfinitive[i] ===
-              fullConjugation[i]
-            ) {
-              commonLength = i + 1;
-            } else {
-              break;
-            }
-          }
-          return commonLength >= 2;
-        }).length;
-
-      // Determine explanation based on actual patterns
-      if (
-        stemBasedCount >=
-        conjugations.length * 0.8
-      ) {
-        // Most conjugations follow the stem pattern
-        // Check for specific irregular patterns
-        if (
-          question.verb.infinitive ===
-          "fazer"
-        ) {
-          return `Irregular verb - most forms use 'faz' stem, but 'eu' form is 'faço'.`;
-        } else if (
-          question.verb.infinitive ===
-          "dizer"
-        ) {
-          return `Irregular verb - most forms use 'diz' stem, but 'eu' form is 'digo'.`;
-        } else {
-          return `Irregular verb - most forms use the same stem.`;
-        }
-      } else if (
-        prefixBasedCount >=
-        conjugations.length * 0.5
-      ) {
-        // Some conjugations share a common root
-        return `Stem-changing verb - the root changes in some forms.`;
-      } else {
-        // Most conjugations are completely different
-        return `Irregular verb with no similar verbs.`;
-      }
+      return `Irregular verb.`;
     }
   };
 
