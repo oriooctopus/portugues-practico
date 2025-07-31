@@ -265,7 +265,20 @@ export const Feedback: React.FC<
         conjugations.length * 0.8
       ) {
         // Most conjugations follow the stem pattern
-        return `Irregular verb - most forms follow a pattern.`;
+        // Check for specific irregular patterns
+        if (
+          question.verb.infinitive ===
+          "fazer"
+        ) {
+          return `Irregular verb - most forms use 'faz' stem, but 'eu' form is 'faço'.`;
+        } else if (
+          question.verb.infinitive ===
+          "dizer"
+        ) {
+          return `Irregular verb - most forms use 'diz' stem, but 'eu' form is 'digo'.`;
+        } else {
+          return `Irregular verb - most forms use the same stem.`;
+        }
       } else if (
         prefixBasedCount >=
         conjugations.length * 0.5
