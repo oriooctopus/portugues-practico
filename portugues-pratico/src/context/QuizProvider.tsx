@@ -41,19 +41,6 @@ function quizReducer(
       if (!state.currentQuestion)
         return state;
 
-      // Normalize accents for comparison
-      const normalizeAccents = (
-        str: string,
-      ) => {
-        return str
-          .normalize("NFD")
-          .replace(
-            /[\u0300-\u036f]/g,
-            "",
-          )
-          .toLowerCase();
-      };
-
       const userAnswerTrimmed =
         state.userAnswer
           .trim()
@@ -61,12 +48,10 @@ function quizReducer(
       const correctAnswer =
         state.currentQuestion.correctAnswer.toLowerCase();
 
-      // Compare with accent normalization
+      // Compare answers directly
       const isCorrect =
-        normalizeAccents(
-          userAnswerTrimmed,
-        ) ===
-        normalizeAccents(correctAnswer);
+        userAnswerTrimmed ===
+        correctAnswer;
 
       // Save wrong answer if incorrect
       if (!isCorrect) {
