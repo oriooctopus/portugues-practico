@@ -41,6 +41,19 @@ function quizReducer(
       if (!state.currentQuestion)
         return state;
 
+      // Normalize accents for comparison
+      const normalizeAccents = (
+        str: string,
+      ) => {
+        return str
+          .normalize("NFD")
+          .replace(
+            /[\u0300-\u036f]/g,
+            "",
+          )
+          .toLowerCase();
+      };
+
       const userAnswerTrimmed =
         state.userAnswer
           .trim()
@@ -50,9 +63,12 @@ function quizReducer(
       const stem =
         state.currentQuestion.stem.toLowerCase();
 
+      // Compare with accent normalization
       let isCorrect =
-        userAnswerTrimmed ===
-        correctAnswer;
+        normalizeAccents(
+          userAnswerTrimmed,
+        ) ===
+        normalizeAccents(correctAnswer);
 
       // If not correct, check if user typed the full conjugation
       // and we need to remove the duplicate letter from concatenation
@@ -77,8 +93,12 @@ function quizReducer(
               1,
             );
           isCorrect =
-            userAnswerWithoutFirst ===
-            correctAnswer;
+            normalizeAccents(
+              userAnswerWithoutFirst,
+            ) ===
+            normalizeAccents(
+              correctAnswer,
+            );
         }
       }
 
