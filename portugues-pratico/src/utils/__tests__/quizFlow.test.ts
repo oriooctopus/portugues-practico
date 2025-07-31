@@ -2,10 +2,15 @@
 describe("Quiz Flow - Accuracy Calculation", () => {
   it("should calculate accuracy correctly in a real quiz scenario", () => {
     // Simulate the quiz state and actions
-    let state = {
+    let state: {
+      score: number;
+      totalQuestions: number;
+      isCorrect: boolean | null;
+      hasRetried: boolean;
+    } = {
       score: 0,
       totalQuestions: 0,
-      isCorrect: null as boolean | null,
+      isCorrect: null,
       hasRetried: false,
     };
 
@@ -88,10 +93,15 @@ describe("Quiz Flow - Accuracy Calculation", () => {
 
   it("should handle the auto-start quiz scenario correctly", () => {
     // Simulate the auto-start scenario where SET_QUESTION_AND_NEXT is called
-    let state = {
+    let state: {
+      score: number;
+      totalQuestions: number;
+      isCorrect: boolean | null;
+      hasRetried: boolean;
+    } = {
       score: 0,
       totalQuestions: 0,
-      isCorrect: null as boolean | null,
+      isCorrect: null,
       hasRetried: false,
     };
 
@@ -128,10 +138,15 @@ describe("Quiz Flow - Accuracy Calculation", () => {
   });
 
   it("should handle retry scenarios correctly", () => {
-    let state = {
+    let state: {
+      score: number;
+      totalQuestions: number;
+      isCorrect: boolean | null;
+      hasRetried: boolean;
+    } = {
       score: 0,
       totalQuestions: 0,
-      isCorrect: null as boolean | null,
+      isCorrect: null,
       hasRetried: false,
     };
 

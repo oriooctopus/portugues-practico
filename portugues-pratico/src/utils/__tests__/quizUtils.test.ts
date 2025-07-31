@@ -83,6 +83,7 @@ describe("quizUtils", () => {
       enabled: true,
       reviewIntervalDays: 1,
     },
+    regularIrregularRatio: 0.7,
   };
 
   describe("getFilteredVerbs", () => {

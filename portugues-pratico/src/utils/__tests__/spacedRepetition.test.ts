@@ -82,6 +82,7 @@ describe("Spaced Repetition", () => {
       enabled: true,
       reviewIntervalDays: 1,
     },
+    regularIrregularRatio: 0.7,
   };
 
   describe("Preventing Verb/Conjugation Combo Repetition", () => {
