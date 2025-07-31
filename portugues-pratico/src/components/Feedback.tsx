@@ -93,6 +93,7 @@ const ExplanationText = styled.p`
   margin-bottom: 1.5rem;
   font-size: 0.95rem;
   max-width: 400px;
+  text-align: center;
 `;
 
 const ConjugationTable = styled.div`
@@ -207,7 +208,7 @@ export const Feedback: React.FC<
     if (regularity === "regular") {
       return `Regular ${verbType} verb.`;
     } else {
-      return `Irregular verb.`;
+      return `Irregular`;
     }
   };
 

@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { getWrongAnswers } from "../utils/wrongAnswers";
 
 const ScoreboardContainer = styled.div`
   background: rgba(255, 255, 255, 0.95);
@@ -49,18 +48,9 @@ const ScoreValue = styled.div`
 const Accuracy = styled.div`
   font-size: 1.8rem;
   font-weight: bold;
-  color: #28a745;
+  color: #667eea;
   line-height: 1;
   margin-bottom: 0.25rem;
-`;
-
-const WrongAnswersCount = styled.div`
-  font-size: 0.65rem;
-  color: #e53e3e;
-  margin-top: 0.25rem;
-  font-weight: 600;
-  line-height: 1;
-  opacity: 0.8;
 `;
 
 interface ScoreboardProps {
@@ -78,9 +68,6 @@ export const Scoreboard: React.FC<
             100,
         )
       : 0;
-
-  const wrongAnswersCount =
-    getWrongAnswers().length;
 
   return (
     <ScoreboardContainer>
