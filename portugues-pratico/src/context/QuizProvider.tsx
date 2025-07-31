@@ -85,28 +85,34 @@ function quizReducer(
         );
       }
 
+      // Update accuracy immediately when answer is submitted
+      // Only increment totalQuestions if this is the first submission (not a retry)
+      const shouldIncrementScore =
+        isCorrect && !state.hasRetried;
+      const shouldIncrementTotal =
+        !state.hasRetried;
+      const newTotalQuestions =
+        shouldIncrementTotal
+          ? state.totalQuestions + 1
+          : state.totalQuestions;
+      const newScore =
+        shouldIncrementScore
+          ? state.score + 1
+          : state.score;
+
       return {
         ...state,
         isAnswered: true,
         isCorrect,
-        // Don't increment score here - wait until NEXT_QUESTION
+        score: newScore,
+        totalQuestions:
+          newTotalQuestions,
+        // Don't reset hasRetried here - keep it for potential retry
       };
     }
     case "NEXT_QUESTION": {
-      // Only increment score if the question was answered correctly on the first try
-      const shouldIncrementScore =
-        state.isCorrect === true &&
-        !state.hasRetried;
-
       return {
         ...state,
-        // Only increment totalQuestions if we had a previous question that was answered
-        totalQuestions: state.isAnswered
-          ? state.totalQuestions + 1
-          : state.totalQuestions,
-        score: shouldIncrementScore
-          ? state.score + 1
-          : state.score,
         isAnswered: false,
         isCorrect: null,
         userAnswer: "",
@@ -115,21 +121,10 @@ function quizReducer(
     }
     case "SET_QUESTION_AND_NEXT": {
       // This is a combined action for when we want to set a new question and move to next
-      // We need to handle the score increment based on the previous question's state, not the current question's state
-      const shouldIncrementScore =
-        state.isCorrect === true &&
-        !state.hasRetried;
-
+      // Score and totalQuestions are now handled in CHECK_ANSWER, so we just reset the state
       return {
         ...state,
         currentQuestion: action.payload,
-        // Only increment totalQuestions if we had a previous question that was answered
-        totalQuestions: state.isAnswered
-          ? state.totalQuestions + 1
-          : state.totalQuestions,
-        score: shouldIncrementScore
-          ? state.score + 1
-          : state.score,
         isAnswered: false,
         isCorrect: null,
         userAnswer: "",

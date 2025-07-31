@@ -30,6 +30,20 @@ describe("Quiz Flow - Accuracy Calculation", () => {
           .trim();
       state.isCorrect = isCorrect;
       state.isAnswered = true;
+
+      // Update accuracy immediately when answer is submitted
+      // Only increment totalQuestions if this is the first submission (not a retry)
+      const shouldIncrementScore =
+        isCorrect && !state.hasRetried;
+      const shouldIncrementTotal =
+        !state.hasRetried;
+      if (shouldIncrementTotal) {
+        state.totalQuestions++;
+      }
+      if (shouldIncrementScore) {
+        state.score++;
+      }
+
       return isCorrect;
     };
 
@@ -40,17 +54,7 @@ describe("Quiz Flow - Accuracy Calculation", () => {
     };
 
     const nextQuestion = () => {
-      // Only increment totalQuestions if the previous question was answered
-      if (state.isAnswered) {
-        state.totalQuestions++;
-      }
-      if (
-        state.isCorrect === true &&
-        !state.hasRetried
-      ) {
-        state.score++;
-      }
-      // Reset for next question
+      // Just reset state for next question - accuracy already updated in checkAnswer
       state.isCorrect = null;
       state.hasRetried = false;
       state.isAnswered = false;
@@ -58,37 +62,37 @@ describe("Quiz Flow - Accuracy Calculation", () => {
 
     // Scenario 1: Correct on first try
     checkAnswer("fala", "fala");
-    nextQuestion();
     expect(state.score).toBe(1);
     expect(state.totalQuestions).toBe(
       1,
     );
+    nextQuestion();
 
     // Scenario 2: Wrong, retry, then correct
     checkAnswer("wrong", "fala");
     retryQuestion();
     checkAnswer("fala", "fala");
-    nextQuestion();
     expect(state.score).toBe(1); // Should still be 1, not 2
     expect(state.totalQuestions).toBe(
       2,
     );
+    nextQuestion();
 
     // Scenario 3: Wrong and move on
     checkAnswer("wrong", "fala");
-    nextQuestion();
     expect(state.score).toBe(1); // Should still be 1
     expect(state.totalQuestions).toBe(
       3,
     );
+    nextQuestion();
 
     // Scenario 4: Correct on first try again
     checkAnswer("fala", "fala");
-    nextQuestion();
     expect(state.score).toBe(2); // Should be 2 now
     expect(state.totalQuestions).toBe(
       4,
     );
+    nextQuestion();
 
     // Calculate final accuracy
     const accuracy = Math.round(
@@ -117,21 +121,40 @@ describe("Quiz Flow - Accuracy Calculation", () => {
 
     const setQuestionAndNext = () => {
       // This simulates the SET_QUESTION_AND_NEXT action
-      // The score should NOT be incremented because there's no previous question result
-      // totalQuestions should NOT be incremented because no previous question was answered
-      if (state.isAnswered) {
-        state.totalQuestions++;
-      }
-      if (
-        state.isCorrect === true &&
-        !state.hasRetried
-      ) {
-        state.score++;
-      }
-      // Reset for next question
+      // Score and totalQuestions are now handled in CHECK_ANSWER, so we just reset state
       state.isCorrect = null;
       state.hasRetried = false;
       state.isAnswered = false;
+    };
+
+    const checkAnswer = (
+      userAnswer: string,
+      correctAnswer: string,
+    ) => {
+      const isCorrect =
+        userAnswer
+          .toLowerCase()
+          .trim() ===
+        correctAnswer
+          .toLowerCase()
+          .trim();
+      state.isCorrect = isCorrect;
+      state.isAnswered = true;
+
+      // Update accuracy immediately when answer is submitted
+      // Only increment totalQuestions if this is the first submission (not a retry)
+      const shouldIncrementScore =
+        isCorrect && !state.hasRetried;
+      const shouldIncrementTotal =
+        !state.hasRetried;
+      if (shouldIncrementTotal) {
+        state.totalQuestions++;
+      }
+      if (shouldIncrementScore) {
+        state.score++;
+      }
+
+      return isCorrect;
     };
 
     // Auto-start should not increment score or totalQuestions
@@ -142,10 +165,7 @@ describe("Quiz Flow - Accuracy Calculation", () => {
     );
 
     // Now answer correctly
-    state.isCorrect = true;
-    state.hasRetried = false;
-    state.isAnswered = true;
-    setQuestionAndNext();
+    checkAnswer("fala", "fala");
     expect(state.score).toBe(1);
     expect(state.totalQuestions).toBe(
       1,
@@ -180,6 +200,20 @@ describe("Quiz Flow - Accuracy Calculation", () => {
           .trim();
       state.isCorrect = isCorrect;
       state.isAnswered = true;
+
+      // Update accuracy immediately when answer is submitted
+      // Only increment totalQuestions if this is the first submission (not a retry)
+      const shouldIncrementScore =
+        isCorrect && !state.hasRetried;
+      const shouldIncrementTotal =
+        !state.hasRetried;
+      if (shouldIncrementTotal) {
+        state.totalQuestions++;
+      }
+      if (shouldIncrementScore) {
+        state.score++;
+      }
+
       return isCorrect;
     };
 
@@ -190,16 +224,7 @@ describe("Quiz Flow - Accuracy Calculation", () => {
     };
 
     const nextQuestion = () => {
-      // Only increment totalQuestions if the previous question was answered
-      if (state.isAnswered) {
-        state.totalQuestions++;
-      }
-      if (
-        state.isCorrect === true &&
-        !state.hasRetried
-      ) {
-        state.score++;
-      }
+      // Just reset state for next question - accuracy already updated in checkAnswer
       state.isCorrect = null;
       state.hasRetried = false;
       state.isAnswered = false;
@@ -212,29 +237,29 @@ describe("Quiz Flow - Accuracy Calculation", () => {
     checkAnswer("wrong2", "fala");
     retryQuestion();
     checkAnswer("fala", "fala");
-    nextQuestion();
     expect(state.score).toBe(0); // Should be 0 because retried
     expect(state.totalQuestions).toBe(
       1,
-    );
+    ); // Only 1 question counted (final submission)
+    nextQuestion();
 
     // Question 2: Correct on first try
     checkAnswer("fala", "fala");
-    nextQuestion();
     expect(state.score).toBe(1); // Should be 1 now
     expect(state.totalQuestions).toBe(
       2,
-    );
+    ); // 1 + 1 = 2
+    nextQuestion();
 
     // Question 3: Wrong, retry, correct
     checkAnswer("wrong", "fala");
     retryQuestion();
     checkAnswer("fala", "fala");
-    nextQuestion();
     expect(state.score).toBe(1); // Should still be 1 because retried
     expect(state.totalQuestions).toBe(
       3,
-    );
+    ); // 2 + 1 = 3
+    nextQuestion();
 
     const accuracy = Math.round(
       (state.score /
