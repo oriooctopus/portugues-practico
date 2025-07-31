@@ -103,12 +103,6 @@ export const Scoreboard: React.FC<
           Accuracy
         </ScoreLabel>
         <Accuracy>{accuracy}%</Accuracy>
-        {wrongAnswersCount > 0 && (
-          <WrongAnswersCount>
-            {wrongAnswersCount} wrong
-            answers saved
-          </WrongAnswersCount>
-        )}
       </ScoreItem>
     </ScoreboardContainer>
   );
