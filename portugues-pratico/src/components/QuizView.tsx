@@ -268,6 +268,9 @@ export const QuizView: React.FC =
               userAnswer={
                 state.userAnswer
               }
+              question={
+                state.currentQuestion
+              }
             />
           </FeedbackArea>
         </QuizCard>
