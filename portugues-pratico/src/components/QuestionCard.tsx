@@ -28,13 +28,13 @@ const VerbTranslation = styled.p`
 `;
 
 const StemDisplay = styled.div`
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #667eea;
-  font-family: "Courier New", monospace;
   display: flex;
   align-items: center;
-  height: 60px;
+  gap: 0.5rem;
+  font-family: "Courier New", monospace;
+  font-size: 1.5rem;
+  color: #666;
+  font-weight: 600;
 `;
 
 const InputContainer = styled.div`
@@ -74,12 +74,9 @@ const AnswerInput = styled.input`
 `;
 
 const PlusSign = styled.span`
-  font-size: 1.5rem;
   color: #667eea;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  height: 60px;
+  font-weight: 700;
+  font-size: 1.5rem;
 `;
 
 interface QuestionCardProps {
@@ -143,18 +140,29 @@ export const QuestionCard: React.FC<
           {formatTense(question.tense)
             .toLowerCase()
             .replace(/\s+/g, "-")}
-          ,{" "}
-          {formatPronoun(
-            question.pronoun,
-          )}
+          {question.tense !==
+            "presentIndicative" ||
+          (question.pronoun !==
+            "voce" &&
+            question.pronoun !==
+              "nos") ? (
+            <>
+              ,{" "}
+              {formatPronoun(
+                question.pronoun,
+              )}
+            </>
+          ) : null}
         </VerbTranslation>
       </VerbInfo>
 
       <InputContainer>
         <StemDisplay>
-          {question.stem}
+          {formatPronoun(
+            question.pronoun,
+          )}
+          <PlusSign>+</PlusSign>
         </StemDisplay>
-        <PlusSign>+</PlusSign>
         <AnswerInput
           type="text"
           value={userAnswer}
