@@ -187,9 +187,6 @@ export const Feedback: React.FC<
     }
   };
 
-  const isDisabled =
-    !isAnswered && !userAnswer.trim();
-
   const getExplanationText = () => {
     const verbType =
       question.verb.infinitive.endsWith(
@@ -482,11 +479,12 @@ export const Feedback: React.FC<
         <ActionButton
           onClick={handleButtonClick}
           isAnswered={isAnswered}
-          disabled={isDisabled}
         >
           {isAnswered
             ? "Next Question"
-            : "Check Answer"}
+            : userAnswer.trim()
+            ? "Check Answer"
+            : "I don't know"}
         </ActionButton>
       </ButtonsContainer>
     </FeedbackContainer>

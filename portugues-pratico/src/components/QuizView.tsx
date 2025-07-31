@@ -114,12 +114,8 @@ export const QuizView: React.FC =
       ) => {
         if (e.key === "Enter") {
           if (!state.isAnswered) {
-            // Only check answer if there's a user answer
-            if (
-              state.userAnswer.trim()
-            ) {
-              checkAnswer();
-            }
+            // Check answer (will handle "I don't know" if no input)
+            checkAnswer();
           } else {
             // If answer is incorrect, retry; otherwise go to next question
             if (
