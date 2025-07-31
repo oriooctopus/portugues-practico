@@ -84,6 +84,243 @@ describe("Spaced Repetition", () => {
     },
   };
 
+  describe("Preventing Verb/Conjugation Combo Repetition", () => {
+    it("should prevent repetition of correct answers until review interval", () => {
+      const now = Date.now();
+      jest
+        .spyOn(Date, "now")
+        .mockReturnValue(now);
+
+      // First, answer correctly
+      updateSpacedRepetitionEntry(
+        mockQuestion,
+        true,
+        1,
+      );
+
+      // Check that the conjugation should NOT be shown again
+      const shouldShow =
+        shouldShowConjugation(
+          mockQuestion,
+          mockSettings,
+        );
+      expect(shouldShow).toBe(false);
+
+      // Verify the entry was created with future review date
+      expect(
+        localStorageMock.setItem,
+      ).toHaveBeenCalledWith(
+        "portuguese_quiz_spaced_repetition",
+        JSON.stringify([
+          {
+            key: {
+              verb: "falar",
+              pronoun: "eu",
+              tense:
+                "presentIndicative",
+            },
+            lastSeen: now,
+            correctCount: 1,
+            incorrectCount: 0,
+            nextReview:
+              now +
+              365 * 24 * 60 * 60 * 1000, // 1 year
+          },
+        ]),
+      );
+    });
+
+    it("should allow repetition of incorrect answers after review interval", () => {
+      const now = Date.now();
+      const pastTime =
+        now - 2 * 24 * 60 * 60 * 1000; // 2 days ago
+      jest
+        .spyOn(Date, "now")
+        .mockReturnValue(now);
+
+      // Create an entry from the past
+      const mockEntries = [
+        {
+          key: {
+            verb: "falar",
+            pronoun: "eu",
+            tense: "presentIndicative",
+          },
+          lastSeen: pastTime,
+          correctCount: 0,
+          incorrectCount: 1,
+          nextReview:
+            pastTime +
+            24 * 60 * 60 * 1000, // 1 day after past time
+        },
+      ];
+      localStorageMock.getItem.mockReturnValue(
+        JSON.stringify(mockEntries),
+      );
+
+      // Check that the conjugation SHOULD be shown again (due for review)
+      const shouldShow =
+        shouldShowConjugation(
+          mockQuestion,
+          mockSettings,
+        );
+      expect(shouldShow).toBe(true);
+    });
+
+    it("should persist data between page loads", () => {
+      const now = Date.now();
+      jest
+        .spyOn(Date, "now")
+        .mockReturnValue(now);
+
+      // Simulate data from a previous session
+      const existingEntries = [
+        {
+          key: {
+            verb: "comer",
+            pronoun: "tu",
+            tense: "presentIndicative",
+          },
+          lastSeen: now - 86400000,
+          correctCount: 1,
+          incorrectCount: 0,
+          nextReview:
+            now +
+            365 * 24 * 60 * 60 * 1000,
+        },
+      ];
+      localStorageMock.getItem.mockReturnValue(
+        JSON.stringify(existingEntries),
+      );
+
+      // Update with new data
+      updateSpacedRepetitionEntry(
+        mockQuestion,
+        false,
+        1,
+      );
+
+      // Verify that both old and new data are preserved
+      expect(
+        localStorageMock.setItem,
+      ).toHaveBeenCalledWith(
+        "portuguese_quiz_spaced_repetition",
+        JSON.stringify([
+          {
+            key: {
+              verb: "comer",
+              pronoun: "tu",
+              tense:
+                "presentIndicative",
+            },
+            lastSeen: now - 86400000,
+            correctCount: 1,
+            incorrectCount: 0,
+            nextReview:
+              now +
+              365 * 24 * 60 * 60 * 1000,
+          },
+          {
+            key: {
+              verb: "falar",
+              pronoun: "eu",
+              tense:
+                "presentIndicative",
+            },
+            lastSeen: now,
+            correctCount: 0,
+            incorrectCount: 1,
+            nextReview:
+              now + 24 * 60 * 60 * 1000,
+          },
+        ]),
+      );
+    });
+
+    it("should handle multiple correct answers for the same conjugation", () => {
+      const now = Date.now();
+      jest
+        .spyOn(Date, "now")
+        .mockReturnValue(now);
+
+      // Answer correctly twice
+      updateSpacedRepetitionEntry(
+        mockQuestion,
+        true,
+        1,
+      );
+      updateSpacedRepetitionEntry(
+        mockQuestion,
+        true,
+        1,
+      );
+
+      // Verify correct count increased
+      expect(
+        localStorageMock.setItem,
+      ).toHaveBeenLastCalledWith(
+        "portuguese_quiz_spaced_repetition",
+        JSON.stringify([
+          {
+            key: {
+              verb: "falar",
+              pronoun: "eu",
+              tense:
+                "presentIndicative",
+            },
+            lastSeen: now,
+            correctCount: 2,
+            incorrectCount: 0,
+            nextReview:
+              now +
+              365 * 24 * 60 * 60 * 1000,
+          },
+        ]),
+      );
+    });
+
+    it("should handle mixed correct/incorrect answers", () => {
+      const now = Date.now();
+      jest
+        .spyOn(Date, "now")
+        .mockReturnValue(now);
+
+      // Answer correctly, then incorrectly
+      updateSpacedRepetitionEntry(
+        mockQuestion,
+        true,
+        1,
+      );
+      updateSpacedRepetitionEntry(
+        mockQuestion,
+        false,
+        1,
+      );
+
+      // Verify both counts are tracked
+      expect(
+        localStorageMock.setItem,
+      ).toHaveBeenLastCalledWith(
+        "portuguese_quiz_spaced_repetition",
+        JSON.stringify([
+          {
+            key: {
+              verb: "falar",
+              pronoun: "eu",
+              tense:
+                "presentIndicative",
+            },
+            lastSeen: now,
+            correctCount: 1,
+            incorrectCount: 1,
+            nextReview:
+              now + 24 * 60 * 60 * 1000, // Should be due for review
+          },
+        ]),
+      );
+    });
+  });
+
   describe("getConjugationKey", () => {
     it("should create a unique key for a conjugation", () => {
       const key = getConjugationKey(
