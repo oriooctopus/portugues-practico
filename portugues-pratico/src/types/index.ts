@@ -17,7 +17,6 @@ export interface QuizSettings {
     tu: boolean;
     voce: boolean;
     nos: boolean;
-    vos: boolean;
     voces: boolean;
   };
   tenses: {

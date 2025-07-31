@@ -182,7 +182,6 @@ const formatPronoun = (
     tu: "tu",
     voce: "você",
     nos: "nós",
-    vos: "vós",
     voces: "vocês",
   };
   return pronounMap[pronoun] || pronoun;

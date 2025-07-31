@@ -7,7 +7,6 @@ export const defaultSettings: QuizSettings =
       tu: true,
       voce: true,
       nos: true,
-      vos: true,
       voces: true,
     },
     tenses: {

@@ -10,7 +10,6 @@
         "tu": "falas",
         "voce": "fala",
         "nos": "falamos",
-        "vos": "falais",
         "voces": "falam"
       },
       "preteriteIndicative": {
@@ -18,7 +17,6 @@
         "tu": "falaste",
         "voce": "falou",
         "nos": "falamos",
-        "vos": "falastes",
         "voces": "falaram"
       },
       "imperfectIndicative": {
@@ -26,7 +24,6 @@
         "tu": "falavas",
         "voce": "falava",
         "nos": "falávamos",
-        "vos": "faláveis",
         "voces": "falavam"
       },
       "futureIndicative": {
@@ -34,7 +31,6 @@
         "tu": "falarás",
         "voce": "falará",
         "nos": "falaremos",
-        "vos": "falareis",
         "voces": "falarão"
       },
       "conditionalIndicative": {
@@ -42,7 +38,6 @@
         "tu": "falarias",
         "voce": "falaria",
         "nos": "falaríamos",
-        "vos": "falaríeis",
         "voces": "falariam"
       },
       "presentSubjunctive": {
@@ -50,7 +45,6 @@
         "tu": "fales",
         "voce": "fale",
         "nos": "falemos",
-        "vos": "faleis",
         "voces": "falem"
       },
       "imperfectSubjunctive": {
@@ -58,14 +52,12 @@
         "tu": "falasses",
         "voce": "falasse",
         "nos": "falássemos",
-        "vos": "falásseis",
         "voces": "falassem"
       },
       "imperative": {
         "tu": "fala",
         "voce": "fale",
         "nos": "falemos",
-        "vos": "falai",
         "voces": "falem"
       }
     }
@@ -81,7 +73,6 @@
         "tu": "comes",
         "voce": "come",
         "nos": "comemos",
-        "vos": "comeis",
         "voces": "comem"
       },
       "preteriteIndicative": {
@@ -89,7 +80,6 @@
         "tu": "comeste",
         "voce": "comeu",
         "nos": "comemos",
-        "vos": "comestes",
         "voces": "comeram"
       },
       "imperfectIndicative": {
@@ -97,7 +87,6 @@
         "tu": "comias",
         "voce": "comia",
         "nos": "comíamos",
-        "vos": "comíeis",
         "voces": "comiam"
       },
       "futureIndicative": {
@@ -105,7 +94,6 @@
         "tu": "comerás",
         "voce": "comerá",
         "nos": "comeremos",
-        "vos": "comereis",
         "voces": "comerão"
       },
       "conditionalIndicative": {
@@ -113,7 +101,6 @@
         "tu": "comerias",
         "voce": "comeria",
         "nos": "comeríamos",
-        "vos": "comeríeis",
         "voces": "comeriam"
       },
       "presentSubjunctive": {
@@ -121,7 +108,6 @@
         "tu": "comas",
         "voce": "coma",
         "nos": "comamos",
-        "vos": "comais",
         "voces": "comam"
       },
       "imperfectSubjunctive": {
@@ -129,14 +115,12 @@
         "tu": "comesses",
         "voce": "comesse",
         "nos": "comêssemos",
-        "vos": "comêsseis",
         "voces": "comessem"
       },
       "imperative": {
         "tu": "come",
         "voce": "coma",
         "nos": "comamos",
-        "vos": "comei",
         "voces": "comam"
       }
     }
@@ -152,7 +136,6 @@
         "tu": "partes",
         "voce": "parte",
         "nos": "partimos",
-        "vos": "partis",
         "voces": "partem"
       },
       "preteriteIndicative": {
@@ -160,7 +143,6 @@
         "tu": "partiste",
         "voce": "partiu",
         "nos": "partimos",
-        "vos": "partistes",
         "voces": "partiram"
       },
       "imperfectIndicative": {
@@ -168,7 +150,6 @@
         "tu": "partias",
         "voce": "partia",
         "nos": "partíamos",
-        "vos": "partíeis",
         "voces": "partiam"
       },
       "futureIndicative": {
@@ -176,7 +157,6 @@
         "tu": "partirás",
         "voce": "partirá",
         "nos": "partiremos",
-        "vos": "partireis",
         "voces": "partirão"
       },
       "conditionalIndicative": {
@@ -184,7 +164,6 @@
         "tu": "partirias",
         "voce": "partiria",
         "nos": "partiríamos",
-        "vos": "partiríeis",
         "voces": "partiriam"
       },
       "presentSubjunctive": {
@@ -192,7 +171,6 @@
         "tu": "partas",
         "voce": "parta",
         "nos": "partamos",
-        "vos": "partais",
         "voces": "partam"
       },
       "imperfectSubjunctive": {
@@ -200,14 +178,12 @@
         "tu": "partisses",
         "voce": "partisse",
         "nos": "partíssemos",
-        "vos": "partísseis",
         "voces": "partissem"
       },
       "imperative": {
         "tu": "parte",
         "voce": "parta",
         "nos": "partamos",
-        "vos": "parti",
         "voces": "partam"
       }
     }
@@ -226,7 +202,6 @@
         "tu": "és",
         "voce": "é",
         "nos": "somos",
-        "vos": "sois",
         "voces": "são"
       },
       "preteriteIndicative": {
@@ -234,7 +209,6 @@
         "tu": "foste",
         "voce": "foi",
         "nos": "fomos",
-        "vos": "fostes",
         "voces": "foram"
       },
       "imperfectIndicative": {
@@ -242,7 +216,6 @@
         "tu": "eras",
         "voce": "era",
         "nos": "éramos",
-        "vos": "éreis",
         "voces": "eram"
       },
       "futureIndicative": {
@@ -250,7 +223,6 @@
         "tu": "serás",
         "voce": "será",
         "nos": "seremos",
-        "vos": "sereis",
         "voces": "serão"
       },
       "conditionalIndicative": {
@@ -258,7 +230,6 @@
         "tu": "serias",
         "voce": "seria",
         "nos": "seríamos",
-        "vos": "seríeis",
         "voces": "seriam"
       },
       "presentSubjunctive": {
@@ -266,7 +237,6 @@
         "tu": "sejas",
         "voce": "seja",
         "nos": "sejamos",
-        "vos": "sejais",
         "voces": "sejam"
       },
       "imperfectSubjunctive": {
@@ -274,14 +244,12 @@
         "tu": "fosses",
         "voce": "fosse",
         "nos": "fôssemos",
-        "vos": "fôsseis",
         "voces": "fossem"
       },
       "imperative": {
         "tu": "sê",
         "voce": "seja",
         "nos": "sejamos",
-        "vos": "sede",
         "voces": "sejam"
       }
     }
@@ -300,7 +268,6 @@
         "tu": "tens",
         "voce": "tem",
         "nos": "temos",
-        "vos": "tendes",
         "voces": "têm"
       },
       "preteriteIndicative": {
@@ -308,7 +275,6 @@
         "tu": "tiveste",
         "voce": "teve",
         "nos": "tivemos",
-        "vos": "tivestes",
         "voces": "tiveram"
       },
       "imperfectIndicative": {
@@ -316,7 +282,6 @@
         "tu": "tinhas",
         "voce": "tinha",
         "nos": "tínhamos",
-        "vos": "tínheis",
         "voces": "tinham"
       },
       "futureIndicative": {
@@ -324,7 +289,6 @@
         "tu": "terás",
         "voce": "terá",
         "nos": "teremos",
-        "vos": "tereis",
         "voces": "terão"
       },
       "conditionalIndicative": {
@@ -332,7 +296,6 @@
         "tu": "terias",
         "voce": "teria",
         "nos": "teríamos",
-        "vos": "teríeis",
         "voces": "teriam"
       },
       "presentSubjunctive": {
@@ -340,7 +303,6 @@
         "tu": "tenhas",
         "voce": "tenha",
         "nos": "tenhamos",
-        "vos": "tenhais",
         "voces": "tenham"
       },
       "imperfectSubjunctive": {
@@ -348,14 +310,12 @@
         "tu": "tivesses",
         "voce": "tivesse",
         "nos": "tivéssemos",
-        "vos": "tivésseis",
         "voces": "tivessem"
       },
       "imperative": {
         "tu": "tem",
         "voce": "tenha",
         "nos": "tenhamos",
-        "vos": "tende",
         "voces": "tenham"
       }
     }
@@ -374,7 +334,6 @@
         "tu": "vais",
         "voce": "vai",
         "nos": "vamos",
-        "vos": "ides",
         "voces": "vão"
       },
       "preteriteIndicative": {
@@ -382,7 +341,6 @@
         "tu": "foste",
         "voce": "foi",
         "nos": "fomos",
-        "vos": "fostes",
         "voces": "foram"
       },
       "imperfectIndicative": {
@@ -390,7 +348,6 @@
         "tu": "ias",
         "voce": "ia",
         "nos": "íamos",
-        "vos": "íeis",
         "voces": "iam"
       },
       "futureIndicative": {
@@ -398,7 +355,6 @@
         "tu": "irás",
         "voce": "irá",
         "nos": "iremos",
-        "vos": "ireis",
         "voces": "irão"
       },
       "conditionalIndicative": {
@@ -406,7 +362,6 @@
         "tu": "irias",
         "voce": "iria",
         "nos": "iríamos",
-        "vos": "iríeis",
         "voces": "iriam"
       },
       "presentSubjunctive": {
@@ -414,7 +369,6 @@
         "tu": "vás",
         "voce": "vá",
         "nos": "vamos",
-        "vos": "vades",
         "voces": "vão"
       },
       "imperfectSubjunctive": {
@@ -422,14 +376,12 @@
         "tu": "fosses",
         "voce": "fosse",
         "nos": "fôssemos",
-        "vos": "fôsseis",
         "voces": "fossem"
       },
       "imperative": {
         "tu": "vai",
         "voce": "vá",
         "nos": "vamos",
-        "vos": "ide",
         "voces": "vão"
       }
     }
@@ -448,7 +400,6 @@
         "tu": "estás",
         "voce": "está",
         "nos": "estamos",
-        "vos": "estais",
         "voces": "estão"
       },
       "preteriteIndicative": {
@@ -456,7 +407,6 @@
         "tu": "estiveste",
         "voce": "esteve",
         "nos": "estivemos",
-        "vos": "estivestes",
         "voces": "estiveram"
       },
       "imperfectIndicative": {
@@ -464,7 +414,6 @@
         "tu": "estavas",
         "voce": "estava",
         "nos": "estávamos",
-        "vos": "estáveis",
         "voces": "estavam"
       },
       "futureIndicative": {
@@ -472,7 +421,6 @@
         "tu": "estarás",
         "voce": "estará",
         "nos": "estaremos",
-        "vos": "estareis",
         "voces": "estarão"
       },
       "conditionalIndicative": {
@@ -480,7 +428,6 @@
         "tu": "estarias",
         "voce": "estaria",
         "nos": "estaríamos",
-        "vos": "estaríeis",
         "voces": "estariam"
       },
       "presentSubjunctive": {
@@ -488,7 +435,6 @@
         "tu": "estejas",
         "voce": "esteja",
         "nos": "estejamos",
-        "vos": "estejais",
         "voces": "estejam"
       },
       "imperfectSubjunctive": {
@@ -496,14 +442,12 @@
         "tu": "estivesses",
         "voce": "estivesse",
         "nos": "estivéssemos",
-        "vos": "estivésseis",
         "voces": "estivessem"
       },
       "imperative": {
         "tu": "está",
         "voce": "esteja",
         "nos": "estejamos",
-        "vos": "estai",
         "voces": "estejam"
       }
     }
@@ -522,7 +466,6 @@
         "tu": "fazes",
         "voce": "faz",
         "nos": "fazemos",
-        "vos": "fazeis",
         "voces": "fazem"
       },
       "preteriteIndicative": {
@@ -530,7 +473,6 @@
         "tu": "fizeste",
         "voce": "fez",
         "nos": "fizemos",
-        "vos": "fizestes",
         "voces": "fizeram"
       },
       "imperfectIndicative": {
@@ -538,7 +480,6 @@
         "tu": "fazias",
         "voce": "fazia",
         "nos": "fazíamos",
-        "vos": "fazíeis",
         "voces": "faziam"
       },
       "futureIndicative": {
@@ -546,7 +487,6 @@
         "tu": "farás",
         "voce": "fará",
         "nos": "faremos",
-        "vos": "fareis",
         "voces": "farão"
       },
       "conditionalIndicative": {
@@ -554,7 +494,6 @@
         "tu": "farias",
         "voce": "faria",
         "nos": "faríamos",
-        "vos": "faríeis",
         "voces": "fariam"
       },
       "presentSubjunctive": {
@@ -562,7 +501,6 @@
         "tu": "faças",
         "voce": "faça",
         "nos": "façamos",
-        "vos": "façais",
         "voces": "façam"
       },
       "imperfectSubjunctive": {
@@ -570,14 +508,12 @@
         "tu": "fizesses",
         "voce": "fizesse",
         "nos": "fizéssemos",
-        "vos": "fizésseis",
         "voces": "fizessem"
       },
       "imperative": {
         "tu": "faz",
         "voce": "faça",
         "nos": "façamos",
-        "vos": "fazei",
         "voces": "façam"
       }
     }
@@ -596,7 +532,6 @@
         "tu": "dizes",
         "voce": "diz",
         "nos": "dizemos",
-        "vos": "dizeis",
         "voces": "dizem"
       },
       "preteriteIndicative": {
@@ -604,7 +539,6 @@
         "tu": "disseste",
         "voce": "disse",
         "nos": "dissemos",
-        "vos": "dissestes",
         "voces": "disseram"
       },
       "imperfectIndicative": {
@@ -612,7 +546,6 @@
         "tu": "dizias",
         "voce": "dizia",
         "nos": "dizíamos",
-        "vos": "dizíeis",
         "voces": "diziam"
       },
       "futureIndicative": {
@@ -620,7 +553,6 @@
         "tu": "dirás",
         "voce": "dirá",
         "nos": "diremos",
-        "vos": "direis",
         "voces": "dirão"
       },
       "conditionalIndicative": {
@@ -628,7 +560,6 @@
         "tu": "dirias",
         "voce": "diria",
         "nos": "diríamos",
-        "vos": "diríeis",
         "voces": "diriam"
       },
       "presentSubjunctive": {
@@ -636,7 +567,6 @@
         "tu": "digas",
         "voce": "diga",
         "nos": "digamos",
-        "vos": "digais",
         "voces": "digam"
       },
       "imperfectSubjunctive": {
@@ -644,14 +574,12 @@
         "tu": "dissesses",
         "voce": "dissesse",
         "nos": "disséssemos",
-        "vos": "dissésseis",
         "voces": "dissessem"
       },
       "imperative": {
         "tu": "diz",
         "voce": "diga",
         "nos": "digamos",
-        "vos": "dizei",
         "voces": "digam"
       }
     }
@@ -670,7 +598,6 @@
         "tu": "vês",
         "voce": "vê",
         "nos": "vemos",
-        "vos": "vedes",
         "voces": "vêem"
       },
       "preteriteIndicative": {
@@ -678,7 +605,6 @@
         "tu": "viste",
         "voce": "viu",
         "nos": "vimos",
-        "vos": "vistes",
         "voces": "viram"
       },
       "imperfectIndicative": {
@@ -686,7 +612,6 @@
         "tu": "vias",
         "voce": "via",
         "nos": "víamos",
-        "vos": "víeis",
         "voces": "viam"
       },
       "futureIndicative": {
@@ -694,7 +619,6 @@
         "tu": "verás",
         "voce": "verá",
         "nos": "veremos",
-        "vos": "vereis",
         "voces": "verão"
       },
       "conditionalIndicative": {
@@ -702,7 +626,6 @@
         "tu": "verias",
         "voce": "veria",
         "nos": "veríamos",
-        "vos": "veríeis",
         "voces": "veriam"
       },
       "presentSubjunctive": {
@@ -710,7 +633,6 @@
         "tu": "vejas",
         "voce": "veja",
         "nos": "vejamos",
-        "vos": "vejais",
         "voces": "vejam"
       },
       "imperfectSubjunctive": {
@@ -718,14 +640,12 @@
         "tu": "visses",
         "voce": "visse",
         "nos": "víssemos",
-        "vos": "vísseis",
         "voces": "vissem"
       },
       "imperative": {
         "tu": "vê",
         "voce": "veja",
         "nos": "vejamos",
-        "vos": "vede",
         "voces": "vejam"
       }
     }
