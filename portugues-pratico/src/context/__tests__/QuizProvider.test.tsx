@@ -744,6 +744,92 @@ describe("QuizProvider", () => {
         );
       }
     });
+
+    it("should handle ver verb with vês correctly", async () => {
+      const user = userEvent.setup();
+      renderWithProvider(
+        <TestComponent />,
+      );
+
+      // Set up ver question with vês
+      const verQuestion: Question = {
+        verb: {
+          verb: "ver",
+          infinitive: "ver",
+          translation: "to see",
+          regularity: "irregular",
+          conjugations: {
+            presentIndicative: {
+              eu: "vejo",
+              tu: "vês",
+              voce: "vê",
+              nos: "vemos",
+              voces: "vêem",
+            },
+          },
+        },
+        pronoun: "tu",
+        tense: "presentIndicative",
+        stem: "",
+        correctAnswer: "vês",
+        fullConjugation: "vês",
+      };
+
+      // Set up the question manually
+      const { dispatch } = useQuiz();
+      dispatch({
+        type: "SET_QUESTION",
+        payload: verQuestion,
+      });
+
+      // Test correct answer with accent
+      const input = screen.getByTestId(
+        "answer-input",
+      );
+      await user.clear(input);
+      await user.type(input, "vês");
+
+      fireEvent.click(
+        screen.getByTestId(
+          "check-answer",
+        ),
+      );
+
+      await waitFor(() => {
+        const state = JSON.parse(
+          screen.getByTestId("state")
+            .textContent || "{}",
+        );
+        expect(state.isCorrect).toBe(
+          true,
+        );
+      });
+
+      // Test incorrect answer without accent
+      fireEvent.click(
+        screen.getByTestId(
+          "retry-question",
+        ),
+      );
+      await user.clear(input);
+      await user.type(input, "ves");
+
+      fireEvent.click(
+        screen.getByTestId(
+          "check-answer",
+        ),
+      );
+
+      await waitFor(() => {
+        const state = JSON.parse(
+          screen.getByTestId("state")
+            .textContent || "{}",
+        );
+        expect(state.isCorrect).toBe(
+          false,
+        );
+      });
+    });
   });
 
   describe("Question State Management", () => {
