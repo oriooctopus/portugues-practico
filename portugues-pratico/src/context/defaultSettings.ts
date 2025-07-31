@@ -25,4 +25,5 @@ export const defaultSettings: QuizSettings =
       enabled: true,
       reviewIntervalDays: 1,
     },
+    regularIrregularRatio: 0.7, // 70% regular, 30% irregular
   };

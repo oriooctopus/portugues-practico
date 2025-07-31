@@ -12,26 +12,82 @@ import {
 export const getFilteredVerbs = (
   settings: QuizSettings,
 ): Verb[] => {
-  return (verbsData as Verb[]).filter(
-    (verb) => {
-      // Filter by regularity
-      if (
-        settings.regularity ===
-          "regular" &&
-        verb.regularity !== "regular"
-      ) {
-        return false;
-      }
-      if (
-        settings.regularity ===
-          "irregular" &&
-        verb.regularity !== "irregular"
-      ) {
-        return false;
-      }
-      return true;
-    },
-  );
+  let filteredVerbs = (
+    verbsData as Verb[]
+  ).filter((verb) => {
+    // Filter by regularity
+    if (
+      settings.regularity ===
+        "regular" &&
+      verb.regularity !== "regular"
+    ) {
+      return false;
+    }
+    if (
+      settings.regularity ===
+        "irregular" &&
+      verb.regularity !== "irregular"
+    ) {
+      return false;
+    }
+    return true;
+  });
+
+  // Apply ratio filter if regularity is set to "all"
+  if (
+    settings.regularity === "all" &&
+    settings.regularIrregularRatio !==
+      undefined
+  ) {
+    const regularVerbs =
+      filteredVerbs.filter(
+        (v) =>
+          v.regularity === "regular",
+      );
+    const irregularVerbs =
+      filteredVerbs.filter(
+        (v) =>
+          v.regularity === "irregular",
+      );
+
+    // Calculate how many of each type to include based on the ratio
+    const totalVerbs =
+      regularVerbs.length +
+      irregularVerbs.length;
+    const targetRegularCount =
+      Math.round(
+        totalVerbs *
+          settings.regularIrregularRatio,
+      );
+    const targetIrregularCount =
+      totalVerbs - targetRegularCount;
+
+    // Randomly sample the appropriate number of each type
+    const shuffledRegular = [
+      ...regularVerbs,
+    ].sort(() => Math.random() - 0.5);
+    const shuffledIrregular = [
+      ...irregularVerbs,
+    ].sort(() => Math.random() - 0.5);
+
+    const selectedRegular =
+      shuffledRegular.slice(
+        0,
+        targetRegularCount,
+      );
+    const selectedIrregular =
+      shuffledIrregular.slice(
+        0,
+        targetIrregularCount,
+      );
+
+    filteredVerbs = [
+      ...selectedRegular,
+      ...selectedIrregular,
+    ];
+  }
+
+  return filteredVerbs;
 };
 
 export const getAvailableTenses = (

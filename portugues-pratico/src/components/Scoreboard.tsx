@@ -72,13 +72,8 @@ export const Scoreboard: React.FC<
   return (
     <ScoreboardContainer>
       <ScoreItem>
-        <ScoreLabel>Score</ScoreLabel>
-        <ScoreValue>{score}</ScoreValue>
-      </ScoreItem>
-
-      <ScoreItem>
         <ScoreLabel>
-          Questions
+          Question
         </ScoreLabel>
         <ScoreValue>
           {totalQuestions}

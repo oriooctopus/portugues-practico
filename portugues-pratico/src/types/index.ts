@@ -39,6 +39,7 @@ export interface QuizSettings {
     enabled: boolean;
     reviewIntervalDays: number;
   };
+  regularIrregularRatio: number; // 0 = all irregular, 1 = all regular
 }
 
 export interface QuizState {

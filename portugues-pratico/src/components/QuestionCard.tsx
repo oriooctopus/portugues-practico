@@ -58,7 +58,7 @@ const AnswerInput = styled.input`
   border-radius: 8px;
   text-align: center;
   font-family: "Courier New", monospace;
-  width: 120px;
+  max-width: 200px;
   height: 60px;
   transition: border-color 0.2s ease;
   box-sizing: border-box;
@@ -116,17 +116,6 @@ export const QuestionCard: React.FC<
     }
   }, [question, isAnswered]);
 
-  const formatTense = (
-    tense: string,
-  ): string => {
-    return tense
-      .replace(/([A-Z])/g, " $1")
-      .replace(/^./, (str) =>
-        str.toUpperCase(),
-      )
-      .trim();
-  };
-
   const formatPronoun = (
     pronoun: string,
   ): string => {
@@ -152,22 +141,8 @@ export const QuestionCard: React.FC<
           {question.verb.infinitive}
         </VerbName>
         <VerbTranslation>
-          {formatTense(question.tense)
-            .toLowerCase()
-            .replace(/\s+/g, "-")}
-          {question.tense !==
-            "presentIndicative" ||
-          (question.pronoun !==
-            "voce" &&
-            question.pronoun !==
-              "nos") ? (
-            <>
-              ,{" "}
-              {formatPronoun(
-                question.pronoun,
-              )}
-            </>
-          ) : null}
+          {question.verb.translation ||
+            "NO TRANSLATION FOUND"}
         </VerbTranslation>
       </VerbInfo>
 

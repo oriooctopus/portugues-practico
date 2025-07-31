@@ -4,6 +4,7 @@ import { useSettings } from "../context/useSettings";
 import { PronounSelector } from "./PronounSelector";
 import { TenseSelector } from "./TenseSelector";
 import { RegularitySelector } from "./RegularitySelector";
+import { RegularIrregularRatioSelector } from "./RegularIrregularRatioSelector";
 import { SpacedRepetitionSelector } from "./SpacedRepetitionSelector";
 import { SpacedRepetitionStats } from "./SpacedRepetitionStats";
 
@@ -115,6 +116,27 @@ export const SettingsView: React.FC =
                 })
               }
             />
+            {settings.regularity ===
+              "all" && (
+              <div
+                style={{
+                  marginTop: "1rem",
+                }}
+              >
+                <RegularIrregularRatioSelector
+                  value={
+                    settings.regularIrregularRatio
+                  }
+                  onChange={(
+                    regularIrregularRatio,
+                  ) => {
+                    updateSettings({
+                      regularIrregularRatio,
+                    });
+                  }}
+                />
+              </div>
+            )}
             <InfoText>
               Filter verbs by their
               regularity pattern.
