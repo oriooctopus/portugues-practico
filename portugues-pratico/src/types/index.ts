@@ -49,6 +49,7 @@ export interface QuizState {
   isAnswered: boolean;
   isCorrect: boolean | null;
   userAnswer: string;
+  hasRetried: boolean;
 }
 
 export interface Question {
@@ -83,6 +84,10 @@ export type QuizAction =
     }
   | { type: "CHECK_ANSWER" }
   | { type: "NEXT_QUESTION" }
+  | {
+      type: "SET_QUESTION_AND_NEXT";
+      payload: Question;
+    }
   | { type: "RESET_QUIZ" }
   | { type: "INCREMENT_SCORE" }
   | { type: "RETRY_QUESTION" };

@@ -93,11 +93,8 @@ export const QuizView: React.FC =
           generateQuestion(settings);
         if (question) {
           dispatch({
-            type: "SET_QUESTION",
+            type: "SET_QUESTION_AND_NEXT",
             payload: question,
-          });
-          dispatch({
-            type: "NEXT_QUESTION",
           });
         }
       }
@@ -150,11 +147,8 @@ export const QuizView: React.FC =
         generateQuestion(settings);
       if (question) {
         dispatch({
-          type: "SET_QUESTION",
+          type: "SET_QUESTION_AND_NEXT",
           payload: question,
-        });
-        dispatch({
-          type: "NEXT_QUESTION",
         });
       }
     };

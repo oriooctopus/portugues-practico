@@ -19,6 +19,7 @@ const initialState: QuizState = {
   isAnswered: false,
   isCorrect: null,
   userAnswer: "",
+  hasRetried: false,
 };
 
 function quizReducer(
@@ -33,6 +34,7 @@ function quizReducer(
         isAnswered: false,
         isCorrect: null,
         userAnswer: "",
+        hasRetried: false,
       };
     case "SET_ANSWER":
       return {
@@ -87,20 +89,49 @@ function quizReducer(
         ...state,
         isAnswered: true,
         isCorrect,
-        score: isCorrect
-          ? state.score + 1
-          : state.score,
+        // Don't increment score here - wait until NEXT_QUESTION
       };
     }
-    case "NEXT_QUESTION":
+    case "NEXT_QUESTION": {
+      // Only increment score if the question was answered correctly on the first try
+      const shouldIncrementScore =
+        state.isCorrect === true &&
+        !state.hasRetried;
+
       return {
         ...state,
         totalQuestions:
           state.totalQuestions + 1,
+        score: shouldIncrementScore
+          ? state.score + 1
+          : state.score,
         isAnswered: false,
         isCorrect: null,
         userAnswer: "",
+        hasRetried: false,
       };
+    }
+    case "SET_QUESTION_AND_NEXT": {
+      // This is a combined action for when we want to set a new question and move to next
+      // We need to handle the score increment based on the previous question's state
+      const shouldIncrementScore =
+        state.isCorrect === true &&
+        !state.hasRetried;
+
+      return {
+        ...state,
+        currentQuestion: action.payload,
+        totalQuestions:
+          state.totalQuestions + 1,
+        score: shouldIncrementScore
+          ? state.score + 1
+          : state.score,
+        isAnswered: false,
+        isCorrect: null,
+        userAnswer: "",
+        hasRetried: false,
+      };
+    }
     case "RESET_QUIZ":
       return {
         ...initialState,
@@ -117,6 +148,7 @@ function quizReducer(
         isAnswered: false,
         isCorrect: null,
         userAnswer: "",
+        hasRetried: true,
       };
     default:
       return state;
