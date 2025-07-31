@@ -103,89 +103,12 @@ export const generateQuestion = (
   const fullConjugation =
     conjugation[randomPronoun];
 
-  // Extract stem and ending
-  // This is a simplified approach - in practice, you might want more sophisticated stem extraction
-  const stem = extractStem(
-    randomVerb.infinitive,
-    fullConjugation,
-  );
-  const correctAnswer =
-    fullConjugation.substring(
-      stem.length,
-    );
-
   return {
     verb: randomVerb,
     pronoun: randomPronoun,
     tense: randomTense,
-    stem,
-    correctAnswer,
+    stem: "",
+    correctAnswer: fullConjugation,
     fullConjugation,
   };
-};
-
-const extractStem = (
-  infinitive: string,
-  conjugation: string,
-): string => {
-  // Simple stem extraction - this could be made more sophisticated
-  // For now, we'll use a basic approach based on common patterns
-
-  // For -ar verbs
-  if (infinitive.endsWith("ar")) {
-    const base = infinitive.slice(
-      0,
-      -2,
-    );
-    if (conjugation.startsWith(base)) {
-      return base;
-    }
-  }
-
-  // For -er verbs
-  if (infinitive.endsWith("er")) {
-    const base = infinitive.slice(
-      0,
-      -2,
-    );
-    if (conjugation.startsWith(base)) {
-      return base;
-    }
-  }
-
-  // For -ir verbs
-  if (infinitive.endsWith("ir")) {
-    const base = infinitive.slice(
-      0,
-      -2,
-    );
-    if (conjugation.startsWith(base)) {
-      return base;
-    }
-  }
-
-  // Fallback: find the longest common prefix
-  let commonPrefix = "";
-  for (
-    let i = 0;
-    i <
-    Math.min(
-      infinitive.length,
-      conjugation.length,
-    );
-    i++
-  ) {
-    if (
-      infinitive[i] === conjugation[i]
-    ) {
-      commonPrefix += infinitive[i];
-    } else {
-      break;
-    }
-  }
-
-  return (
-    commonPrefix ||
-    infinitive.slice(0, -2)
-  );
 };
