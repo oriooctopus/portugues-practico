@@ -7,11 +7,13 @@ describe("Quiz Flow - Accuracy Calculation", () => {
       totalQuestions: number;
       isCorrect: boolean | null;
       hasRetried: boolean;
+      isAnswered: boolean;
     } = {
       score: 0,
       totalQuestions: 0,
       isCorrect: null,
       hasRetried: false,
+      isAnswered: false,
     };
 
     // Helper functions to simulate quiz actions
@@ -27,16 +29,21 @@ describe("Quiz Flow - Accuracy Calculation", () => {
           .toLowerCase()
           .trim();
       state.isCorrect = isCorrect;
+      state.isAnswered = true;
       return isCorrect;
     };
 
     const retryQuestion = () => {
       state.hasRetried = true;
       state.isCorrect = null;
+      state.isAnswered = false;
     };
 
     const nextQuestion = () => {
-      state.totalQuestions++;
+      // Only increment totalQuestions if the previous question was answered
+      if (state.isAnswered) {
+        state.totalQuestions++;
+      }
       if (
         state.isCorrect === true &&
         !state.hasRetried
@@ -46,6 +53,7 @@ describe("Quiz Flow - Accuracy Calculation", () => {
       // Reset for next question
       state.isCorrect = null;
       state.hasRetried = false;
+      state.isAnswered = false;
     };
 
     // Scenario 1: Correct on first try
@@ -98,17 +106,22 @@ describe("Quiz Flow - Accuracy Calculation", () => {
       totalQuestions: number;
       isCorrect: boolean | null;
       hasRetried: boolean;
+      isAnswered: boolean;
     } = {
       score: 0,
       totalQuestions: 0,
       isCorrect: null,
       hasRetried: false,
+      isAnswered: false,
     };
 
     const setQuestionAndNext = () => {
       // This simulates the SET_QUESTION_AND_NEXT action
       // The score should NOT be incremented because there's no previous question result
-      state.totalQuestions++;
+      // totalQuestions should NOT be incremented because no previous question was answered
+      if (state.isAnswered) {
+        state.totalQuestions++;
+      }
       if (
         state.isCorrect === true &&
         !state.hasRetried
@@ -118,22 +131,24 @@ describe("Quiz Flow - Accuracy Calculation", () => {
       // Reset for next question
       state.isCorrect = null;
       state.hasRetried = false;
+      state.isAnswered = false;
     };
 
-    // Auto-start should not increment score
+    // Auto-start should not increment score or totalQuestions
     setQuestionAndNext();
     expect(state.score).toBe(0);
     expect(state.totalQuestions).toBe(
-      1,
+      0,
     );
 
     // Now answer correctly
     state.isCorrect = true;
     state.hasRetried = false;
+    state.isAnswered = true;
     setQuestionAndNext();
     expect(state.score).toBe(1);
     expect(state.totalQuestions).toBe(
-      2,
+      1,
     );
   });
 
@@ -143,11 +158,13 @@ describe("Quiz Flow - Accuracy Calculation", () => {
       totalQuestions: number;
       isCorrect: boolean | null;
       hasRetried: boolean;
+      isAnswered: boolean;
     } = {
       score: 0,
       totalQuestions: 0,
       isCorrect: null,
       hasRetried: false,
+      isAnswered: false,
     };
 
     const checkAnswer = (
@@ -162,16 +179,21 @@ describe("Quiz Flow - Accuracy Calculation", () => {
           .toLowerCase()
           .trim();
       state.isCorrect = isCorrect;
+      state.isAnswered = true;
       return isCorrect;
     };
 
     const retryQuestion = () => {
       state.hasRetried = true;
       state.isCorrect = null;
+      state.isAnswered = false;
     };
 
     const nextQuestion = () => {
-      state.totalQuestions++;
+      // Only increment totalQuestions if the previous question was answered
+      if (state.isAnswered) {
+        state.totalQuestions++;
+      }
       if (
         state.isCorrect === true &&
         !state.hasRetried
@@ -180,6 +202,7 @@ describe("Quiz Flow - Accuracy Calculation", () => {
       }
       state.isCorrect = null;
       state.hasRetried = false;
+      state.isAnswered = false;
     };
 
     // Test multiple retry scenarios

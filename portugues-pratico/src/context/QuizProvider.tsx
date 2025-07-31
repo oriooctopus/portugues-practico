@@ -100,8 +100,10 @@ function quizReducer(
 
       return {
         ...state,
-        totalQuestions:
-          state.totalQuestions + 1,
+        // Only increment totalQuestions if we had a previous question that was answered
+        totalQuestions: state.isAnswered
+          ? state.totalQuestions + 1
+          : state.totalQuestions,
         score: shouldIncrementScore
           ? state.score + 1
           : state.score,
@@ -113,7 +115,7 @@ function quizReducer(
     }
     case "SET_QUESTION_AND_NEXT": {
       // This is a combined action for when we want to set a new question and move to next
-      // We need to handle the score increment based on the previous question's state
+      // We need to handle the score increment based on the previous question's state, not the current question's state
       const shouldIncrementScore =
         state.isCorrect === true &&
         !state.hasRetried;
@@ -121,8 +123,10 @@ function quizReducer(
       return {
         ...state,
         currentQuestion: action.payload,
-        totalQuestions:
-          state.totalQuestions + 1,
+        // Only increment totalQuestions if we had a previous question that was answered
+        totalQuestions: state.isAnswered
+          ? state.totalQuestions + 1
+          : state.totalQuestions,
         score: shouldIncrementScore
           ? state.score + 1
           : state.score,
