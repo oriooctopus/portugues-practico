@@ -89,8 +89,10 @@ const ExplanationTitle = styled.h4`
 const ExplanationText = styled.p`
   color: #555;
   line-height: 1.6;
+  margin: auto;
   margin-bottom: 1.5rem;
   font-size: 0.95rem;
+  max-width: 400px;
 `;
 
 const ConjugationTable = styled.div`
@@ -98,12 +100,15 @@ const ConjugationTable = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
   margin-top: 1rem;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const ConjugationRow = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 0.5rem;
+  padding: 0.5rem 0.75rem;
   background: rgba(102, 126, 234, 0.05);
   border-radius: 6px;
 `;
@@ -116,6 +121,17 @@ const Pronoun = styled.span`
 const Conjugation = styled.span`
   font-family: "Courier New", monospace;
   color: #333;
+`;
+
+const ConjugationStem = styled.span`
+  // font-family: "Courier New", monospace;
+  // color: #666;
+`;
+
+const ConjugationEnding = styled.span`
+  font-family: "Courier New", monospace;
+  color: #667eea;
+  font-weight: 600;
 `;
 
 const CorrectAnswer = styled.div<{
@@ -194,31 +210,74 @@ export const Feedback: React.FC<
     if (regularity === "regular") {
       return `Regular ${verbType} verb - follows standard conjugation patterns.`;
     } else {
-      // Handle irregular verbs with brief explanations
-      const irregularCategories =
-        question.verb
-          .irregular_category || [];
+      // Analyze the actual conjugations to determine the pattern
+      const conjugations =
+        Object.values(
+          question.verb.conjugations[
+            question.tense
+          ] || {},
+        ) as string[];
+      const stem =
+        question.stem.toLowerCase();
+      const infinitive =
+        question.verb.infinitive.toLowerCase();
+      const baseInfinitive =
+        infinitive.substring(
+          0,
+          infinitive.length - 2,
+        );
 
+      // Check how many conjugations start with the stem
+      const stemBasedCount =
+        conjugations.filter((conj) =>
+          conj
+            .toLowerCase()
+            .startsWith(stem),
+        ).length;
+
+      // Check how many have meaningful common prefix with infinitive
+      const prefixBasedCount =
+        conjugations.filter((conj) => {
+          const fullConjugation =
+            conj.toLowerCase();
+          let commonLength = 0;
+          for (
+            let i = 0;
+            i <
+            Math.min(
+              baseInfinitive.length,
+              fullConjugation.length,
+            );
+            i++
+          ) {
+            if (
+              baseInfinitive[i] ===
+              fullConjugation[i]
+            ) {
+              commonLength = i + 1;
+            } else {
+              break;
+            }
+          }
+          return commonLength >= 2;
+        }).length;
+
+      // Determine explanation based on actual patterns
       if (
-        irregularCategories.includes(
-          "highly_irregular",
-        )
+        stemBasedCount >=
+        conjugations.length * 0.8
       ) {
-        return `Irregular verb with no similar verbs.`;
+        // Most conjugations follow the stem pattern
+        return `Irregular verb - most forms follow a pattern.`;
       } else if (
-        irregularCategories.includes(
-          "stem_changing",
-        )
+        prefixBasedCount >=
+        conjugations.length * 0.5
       ) {
+        // Some conjugations share a common root
         return `Stem-changing verb - the root changes in some forms.`;
-      } else if (
-        irregularCategories.includes(
-          "orthographic",
-        )
-      ) {
-        return `Spelling changes to maintain pronunciation.`;
       } else {
-        return `Irregular verb - doesn't follow standard patterns.`;
+        // Most conjugations are completely different
+        return `Irregular verb with no similar verbs.`;
       }
     }
   };
@@ -251,6 +310,78 @@ export const Feedback: React.FC<
         str.toUpperCase(),
       )
       .trim();
+  };
+
+  const splitConjugation = (
+    conjugation: string,
+  ) => {
+    const stem =
+      question.stem.toLowerCase();
+    const fullConjugation =
+      conjugation.toLowerCase();
+
+    // If the conjugation starts with the stem, split it
+    if (
+      fullConjugation.startsWith(stem)
+    ) {
+      return {
+        stem: conjugation.substring(
+          0,
+          stem.length,
+        ),
+        ending: conjugation.substring(
+          stem.length,
+        ),
+      };
+    }
+
+    // For irregular verbs, try to find a common prefix with infinitive
+    const infinitive =
+      question.verb.infinitive.toLowerCase();
+    const baseInfinitive =
+      infinitive.substring(
+        0,
+        infinitive.length - 2,
+      ); // Remove -ar/-er/-ir
+
+    let commonLength = 0;
+    for (
+      let i = 0;
+      i <
+      Math.min(
+        baseInfinitive.length,
+        fullConjugation.length,
+      );
+      i++
+    ) {
+      if (
+        baseInfinitive[i] ===
+        fullConjugation[i]
+      ) {
+        commonLength = i + 1;
+      } else {
+        break;
+      }
+    }
+
+    // Only use common prefix if it's meaningful (at least 2 characters)
+    if (commonLength >= 2) {
+      return {
+        stem: conjugation.substring(
+          0,
+          commonLength,
+        ),
+        ending: conjugation.substring(
+          commonLength,
+        ),
+      };
+    }
+
+    // For completely different words, highlight the whole conjugation
+    return {
+      stem: "",
+      ending: conjugation,
+    };
   };
 
   return (
@@ -305,22 +436,33 @@ export const Feedback: React.FC<
                 ([
                   pronoun,
                   conjugation,
-                ]) => (
-                  <ConjugationRow
-                    key={pronoun}
-                  >
-                    <Pronoun>
-                      {formatPronoun(
-                        pronoun,
-                      )}
-                    </Pronoun>
-                    <Conjugation>
-                      {
-                        conjugation as string
-                      }
-                    </Conjugation>
-                  </ConjugationRow>
-                ),
+                ]) => {
+                  const {
+                    stem,
+                    ending,
+                  } = splitConjugation(
+                    conjugation as string,
+                  );
+                  return (
+                    <ConjugationRow
+                      key={pronoun}
+                    >
+                      <Pronoun>
+                        {formatPronoun(
+                          pronoun,
+                        )}
+                      </Pronoun>
+                      <Conjugation>
+                        <ConjugationStem>
+                          {stem}
+                        </ConjugationStem>
+                        <ConjugationEnding>
+                          {ending}
+                        </ConjugationEnding>
+                      </Conjugation>
+                    </ConjugationRow>
+                  );
+                },
               )}
             </ConjugationTable>
           </ExplanationSection>
