@@ -1,0 +1,11 @@
+---
+alwaysApply: true
+---
+
+Don't deploy unless I ask you. I will deploy.
+
+For every logic detail I ask for, write a test
+
+When using playwright, use it in headless to not disturb me.
+
+When opening a dev server for testing, make sure to close it afterwards
